@@ -1,15 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, MapPin, Heart } from "lucide-react";
+import { CalendarDays, MapPin, Users, Heart } from "lucide-react";
 
-const Registration = () => {
+const RegistrationCard = () => {
   return (
     <section
-      className="py-24 bg-card"
-      id="booking"
+      className="py-24 w-full"
+      id="registration"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -19,15 +25,14 @@ const Registration = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-5xl font-bold text-primary mb-4">
-            Begin Your Journey of Self-Discovery
+            Join the International Shri Ekadash Rudra Camp 2025
           </h2>
-          <p className="text-xl text-secondary-foreground max-w-2xl mx-auto">
-            Experience the transformative power of Sahaja Yoga meditation in our
-            peaceful sanctuary
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Experience a transformative spiritual journey in the heart of Rahuri
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="flex flex-col gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -36,21 +41,32 @@ const Registration = () => {
             <Card className="border-2 border-primary/10 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-primary">
-                  Join Our Meditation Sessions
+                  Event Highlights
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center text-secondary-foreground">
+                <div className="flex items-center text-muted-foreground">
                   <CalendarDays className="mr-3 h-5 w-5 text-primary" />
-                  <span>Regular sessions available throughout the week</span>
+                  <span>
+                    5-day immersive spiritual experience (Jan 30 - Feb 3, 2025)
+                  </span>
                 </div>
-                <div className="flex items-center text-secondary-foreground">
+                <div className="flex items-center text-muted-foreground">
                   <MapPin className="mr-3 h-5 w-5 text-primary" />
-                  <span>Peaceful location with easy accessibility</span>
+                  <span>
+                    Seminar at Raghunandan Hall & Puja at Swayambhu Ekadash
+                    Rudra Bhumi
+                  </span>
                 </div>
-                <div className="flex items-center text-secondary-foreground">
+                <div className="flex items-center text-muted-foreground">
+                  <Users className="mr-3 h-5 w-5 text-primary" />
+                  <span>Join Sahaja Yogis from around the world</span>
+                </div>
+                <div className="flex items-center text-muted-foreground">
                   <Heart className="mr-3 h-5 w-5 text-primary" />
-                  <span>Guided by experienced practitioners</span>
+                  <span>
+                    Deepen your meditation practice and spiritual knowledge
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -62,32 +78,21 @@ const Registration = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col space-y-6"
           >
-            <div className="bg-primary/5 rounded-lg p-6 text-center">
-              <p className="text-lg text-secondary-foreground mb-2">
-                Transform Your Life
-              </p>
-              <p className="text-2xl font-bold text-primary mb-2">
-                Through Inner Peace
-              </p>
-              <p className="text-sm text-secondary-foreground">
-                Expert guidance for your meditation journey
-              </p>
-            </div>
 
             <Button size="lg" className="w-full py-6 text-lg" asChild>
               <a
-                href="/registration"
+                href="https://forms.eduqfix.com/rahuwof/add"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center"
               >
-                Register Here
+                Register Now
               </a>
             </Button>
 
             <p className="text-sm text-center text-muted-foreground">
-              Join hundreds of others who have discovered inner peace through
-              Sahaja Yoga
+              Secure your spot for this spiritually enriching event and embark
+              on a journey of self-discovery
             </p>
           </motion.div>
         </div>
@@ -96,4 +101,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegistrationCard;

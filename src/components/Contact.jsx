@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 
 const Contact = () => {
   const cardVariants = {
@@ -13,9 +13,36 @@ const Contact = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email",
+      content: "ekadashrudramusalvadi@gmail.com",
+    },
+    {
+      icon: Phone,
+      title: "Contact Numbers",
+      content: [
+        "+91 98228 91717",
+        "+91 99221 27980",
+        "+91 96049 44096",
+        "+91 87885 59776",
+        "+91 81495 51970",
+        "+91 99750 91525",
+      ],
+    },
+    {
+      icon: MapPin,
+      title: "Address",
+      content:
+        "International Sahaja Yoga Meditation Center, Shree Swayambhu Ekadash Rudra Bhumi, Musalwadi, Near Rahuri Lake, Musalwadi",
+      link: "https://maps.app.goo.gl/Wxr2HVuQFtir4Dy9A",
+    },
+  ];
+
   return (
     <section
-      className="section-min-height py-20 flex items-center bg-background"
+      className="min-h-screen py-20 bg-gradient-to-b from-background to-secondary/20"
       id="contact"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,51 +63,57 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12">
           <motion.div
             variants={cardVariants}
             initial="hidden"
             animate="visible"
             className="space-y-8"
           >
-            <h3 className="text-3xl font-semibold text-primary">
-              Start Your Journey
-            </h3>
-            <p className="text-xl text-secondary-foreground">
-              Embark on the path of spiritual awakening with Sahaja Yoga
-              meditation. Join our free sessions or visit our meditation
-              centers.
-            </p>
-
             <div className="space-y-6">
-              {[
-                {
-                  icon: Phone,
-                  title: "Phone",
-                  content: "1800 2700 800 (Toll Free)",
-                },
-                { icon: Mail, title: "Email", content: "info@sahajayoga.org" },
-                {
-                  icon: MapPin,
-                  title: "Ashrams",
-                  content: "Centers worldwide",
-                },
-              ].map((item, index) => (
+              {contactInfo.map((item, index) => (
                 <Card
                   key={index}
                   className="bg-gradient-to-r from-background to-secondary"
                 >
-                  <CardContent className="p-6 flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                      <item.icon className="text-primary-foreground" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-medium text-primary">
-                        {item.title}
-                      </h4>
-                      <p className="text-secondary-foreground">
-                        {item.content}
-                      </p>
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <item.icon className="text-primary-foreground" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-xl font-medium text-primary mb-2">
+                          {item.title}
+                        </h4>
+                        {Array.isArray(item.content) ? (
+                          <div className="grid grid-cols-2 gap-2">
+                            {item.content.map((number, idx) => (
+                              <a
+                                key={idx}
+                                href={`tel:${number}`}
+                                className="text-secondary-foreground hover:text-primary transition-colors"
+                              >
+                                {number}
+                              </a>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="text-secondary-foreground">
+                            {item.content}
+                            {item.link && (
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center mt-2 text-primary hover:text-primary/80 transition-colors"
+                              >
+                                View on Maps{" "}
+                                <ExternalLink className="ml-2 w-4 h-4" />
+                              </a>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -94,8 +127,11 @@ const Contact = () => {
             animate="visible"
             transition={{ delay: 0.2 }}
           >
-            <Card className="bg-gradient-to-br from-secondary to-background">
+            <Card className="bg-gradient-to-tr from-background to-secondary">
               <CardContent className="p-8">
+                <h3 className="text-2xl font-semibold text-primary mb-6">
+                  Send us a Message
+                </h3>
                 <form className="space-y-6">
                   <div>
                     <label
@@ -104,7 +140,12 @@ const Contact = () => {
                     >
                       Full Name
                     </label>
-                    <Input id="name" name="name" required className="w-full" />
+                    <Input
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full bg-background/50"
+                    />
                   </div>
 
                   <div>
@@ -119,7 +160,7 @@ const Contact = () => {
                       name="email"
                       type="email"
                       required
-                      className="w-full"
+                      className="w-full bg-background/50"
                     />
                   </div>
 
@@ -134,7 +175,7 @@ const Contact = () => {
                       id="phone"
                       name="phone"
                       type="tel"
-                      className="w-full"
+                      className="w-full bg-background/50"
                     />
                   </div>
 
@@ -150,13 +191,13 @@ const Contact = () => {
                       name="message"
                       rows={4}
                       required
-                      className="w-full"
+                      className="w-full bg-background/50"
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-primary text-white hover:bg-primary/90"
+                    className="w-full bg-primary text-white hover:bg-primary/90 transition-colors"
                   >
                     Send Message
                   </Button>

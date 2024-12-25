@@ -6,16 +6,17 @@ import Gallery from "@/components/Gallery";
 import Registration from "@/components/Registration";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { Video } from "@/components/Video";
 
 export default function Home() {
   return (
     <main className="bg-background">
       <Navbar />
       <Hero />
-      <About />
-      <Gallery />
-      <Schedule />
       <Registration />
+      {/* <About /> */}
+      <Video/>
+      <Schedule />
       <Contact />
       <Footer />
     </main>

@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { format } from "date-fns";
-import { Eclipse, Lightbulb, Bed, Map } from "lucide-react";
+import { Eclipse, Lightbulb, Bed, Map, ExternalLink, Youtube } from "lucide-react";
 
 const Schedule = () => {
   const [sessions, setSessions] = useState([]);
@@ -65,15 +65,11 @@ const Schedule = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-secondary-foreground text-xl mb-2">
-            ॥ दैनिक ध्यान ॥
-          </div>
           <h2 className="text-4xl font-bold text-primary mb-4">
-            Daily Meditation Schedule
+            Weekly Meditation Schedule
           </h2>
           <p className="text-xl text-secondary-foreground max-w-2xl mx-auto">
-            Join our sacred meditation sessions to awaken your inner divine
-            energy.
+            Join our sacred meditation sessions every Thursday on YouTube.
           </p>
         </motion.div>
 
@@ -186,7 +182,7 @@ const Schedule = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/80 backdrop-blur">
+              {/* <Card className="bg-white/80 backdrop-blur">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-semibold text-primary mb-6">
                     Sacred Resources
@@ -212,6 +208,60 @@ const Schedule = () => {
                     )}
                   </div>
                 </CardContent>
+              </Card> */}
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl">Additional Links</CardTitle>
+                </CardHeader>
+                <CardContent className="mt-3">
+                  <div className="space-y-4">
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="w-full justify-start"
+                    >
+                      <a
+                        href="https://Rahurisahajyoga.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center"
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" /> Official
+                        Website
+                      </a>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="w-full justify-start"
+                    >
+                      <a
+                        href="https://youtube.com/@rahurisahajyogaswayambhuek2722"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center"
+                      >
+                        <Youtube className="mr-2 h-4 w-4" /> YouTube Channel
+                      </a>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="w-full justify-start"
+                    >
+                      <a
+                        href="https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center"
+                      >
+                        <Youtube className="mr-2 h-4 w-4" /> Watch Ekadash Rudra
+                        Documentary
+                      </a>
+                    </Button>
+                  </div>
+                </CardContent>
               </Card>
             </div>
           </motion.div>
@@ -220,5 +270,7 @@ const Schedule = () => {
     </section>
   );
 };
+
+
 
 export default Schedule;
