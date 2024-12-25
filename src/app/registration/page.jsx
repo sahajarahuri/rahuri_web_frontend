@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import {
   Calendar,
   MapPin,
@@ -11,13 +10,17 @@ import {
   Youtube,
   ExternalLink,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Card,
   CardContent,
-  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Clock, CalendarDays, ArrowRight } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -26,7 +29,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import RegistrationCard from "@/components/RegistrationCard";
@@ -86,7 +88,7 @@ const EkadashRudraLanding = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            International Shri Ekadash Rudra Camp 2025
+            International Shri Ekadash Rudra Meditation, Pooja and Havan 2025
           </motion.h1>
           <motion.p
             className="text-xl text-muted-foreground"
@@ -97,6 +99,32 @@ const EkadashRudraLanding = () => {
             Join us for a transformative spiritual experience
           </motion.p>
         </section>
+
+        <motion.div
+          className="my-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Card className="border-2 border-primary/20">
+            <CardContent className="p-6">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    Register now for Shri Ekadash Rudra Meditation, Pooja and
+                    Havan
+                  </h3>
+                </div>
+                <Button size="lg" className="group" asChild>
+                  <a href="#registration" className="flex items-center gap-2">
+                    Register Now
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
         {/* Main Content */}
         <div className="grid md:grid-cols-2 gap-8">
@@ -118,7 +146,6 @@ const EkadashRudraLanding = () => {
             <PricingCard />
             <ContactCard contacts={contacts} />
             <ScheduleCard scheduleData={scheduleData} />
-           
           </div>
         </div>
 
@@ -299,47 +326,6 @@ const ContactCard = ({ contacts }) => (
   </Card>
 );
 
-const LinksCard = () => (
-  <Card>
-    <CardHeader className="bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-t-lg">
-      <CardTitle>Additional Links</CardTitle>
-    </CardHeader>
-    <CardContent className="mt-3">
-      <div className="space-y-4">
-        <Button variant="outline" asChild className="w-full justify-start">
-          <a
-            href="https://Rahurisahajyoga.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center"
-          >
-            <ExternalLink className="mr-2 h-4 w-4" /> Official Website
-          </a>
-        </Button>
-        <Button variant="outline" asChild className="w-full justify-start">
-          <a
-            href="https://youtube.com/@rahurisahajyogaswayambhuek2722"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center"
-          >
-            <Youtube className="mr-2 h-4 w-4" /> YouTube Channel
-          </a>
-        </Button>
-        <Button variant="outline" asChild className="w-full justify-start">
-          <a
-            href="https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center"
-          >
-            <Youtube className="mr-2 h-4 w-4" /> Watch Ekadash Rudra Documentary
-          </a>
-        </Button>
-      </div>
-    </CardContent>
-  </Card>
-);
 
 
 

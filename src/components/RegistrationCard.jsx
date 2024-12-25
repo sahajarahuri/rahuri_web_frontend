@@ -38,7 +38,7 @@ const RegistrationCard = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="border-2 border-primary/10 backdrop-blur-sm">
+            <Card className="border-2 border-primary/20 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-primary">
                   Event Highlights

@@ -237,20 +237,6 @@ const Schedule = () => {
                       className="w-full justify-start"
                     >
                       <a
-                        href="https://youtube.com/@rahurisahajyogaswayambhuek2722"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center"
-                      >
-                        <Youtube className="mr-2 h-4 w-4" /> YouTube Channel
-                      </a>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      asChild
-                      className="w-full justify-start"
-                    >
-                      <a
                         href="https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB"
                         target="_blank"
                         rel="noopener noreferrer"

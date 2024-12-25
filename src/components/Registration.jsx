@@ -7,10 +7,7 @@ import { CalendarDays, MapPin, Heart } from "lucide-react";
 
 const Registration = () => {
   return (
-    <section
-      className="py-24 bg-card"
-      id="booking"
-    >
+    <section className="py-24 bg-card" id="booking">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12"
@@ -63,14 +60,11 @@ const Registration = () => {
             className="flex flex-col space-y-6"
           >
             <div className="bg-primary/5 rounded-lg p-6 text-center">
-              <p className="text-lg text-secondary-foreground mb-2">
-                Transform Your Life
-              </p>
               <p className="text-2xl font-bold text-primary mb-2">
-                Through Inner Peace
+                Upcoming Pooja & Havan
               </p>
               <p className="text-sm text-secondary-foreground">
-                Expert guidance for your meditation journey
+                International Shri Ekadash Rudra Meditation, Pooja and Havan
               </p>
             </div>
 
