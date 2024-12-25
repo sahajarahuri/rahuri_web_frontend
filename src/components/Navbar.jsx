@@ -46,7 +46,7 @@ const Navbar = () => {
             <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-8">
               {[
                 { href: "#home", label: "Home" },
-                { href: "#about", label: "About" },
+                { href: "#register", label: "Register" },
                 { href: "#schedule", label: "Schedule" },
                 { href: "#contact", label: "Contact" },
               ].map((link) => (

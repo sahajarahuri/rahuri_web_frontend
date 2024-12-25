@@ -115,10 +115,15 @@ const EkadashRudraLanding = () => {
                     Havan
                   </h3>
                 </div>
-                <Button size="lg" className="group" asChild>
-                  <a href="#registration" className="flex items-center gap-2">
+
+                <Button size="lg" className=" px-12 py-6 text-lg" asChild>
+                  <a
+                    href="https://forms.eduqfix.com/rahuwof/add"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center"
+                  >
                     Register Now
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </Button>
               </div>
