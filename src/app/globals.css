@@ -7,8 +7,17 @@
   src: url(/fonts/Kurale.ttf);
 }
 
+@font-face {
+  font-family: Sura;
+  src: url(/fonts/Sura.ttf);
+}
+
 body {
   font-family: Kurale, Helvetica, sans-serif;
+}
+
+.hindi{
+  font-family: Sura;
 }
 
 @layer base {

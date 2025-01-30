@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { format } from "date-fns";
-import { Eclipse, Lightbulb, Bed, Map, ExternalLink, Youtube } from "lucide-react";
+import { Eclipse, Lightbulb, Bed, Map, ExternalLink, Youtube, ArrowRight, MapPin, Calendar, YoutubeIcon } from "lucide-react";
 
 const Schedule = () => {
   const [sessions, setSessions] = useState([]);
@@ -153,32 +153,97 @@ const Schedule = () => {
             transition={{ delay: 0.2 }}
           >
             <div className="space-y-8">
-              <Card className="bg-gradient-to-br from-primary to-accent">
-                <CardContent className="p-8 text-white">
-                  <div className="flex items-center space-x-4 mb-6">
-                    <Map className="text-3xl" />
-                    <h3 className="text-2xl font-semibold">
-                      Join Next Session
+              <Card className="bg-gradient-to-br from-primary/90 to-accent overflow-hidden hindi">
+                <CardContent className="p-6 text-white">
+                  {/* Top Banner */}
+                  <div className="flex justify-center items-center space-x-3 mb-8 py-3 border-b border-white/20">
+                    <Map className="h-6 w-6" />
+                    <h3 className="text-xl font-medium">
+                      Sahaja Yoga Meditation Center | सहज योग ध्यान केंद्र
                     </h3>
                   </div>
-                  <p className="mb-8 text-lg opacity-90">
-                    Experience the divine knowledge of self-realization with our
-                    enlightened guides
-                  </p>
+
+                  {/* Main Content Grid */}
+                  <div className="grid gap-4">
+                    {/* Address Section */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
+                      <div className="flex items-center space-x-2 text-white/80">
+                        <MapPin className="h-4 w-4" />
+                        <p className="text-lg hindi">
+                          श्री स्वयंभू एकादश रुद्र भूमी
+                          <p className="text-lg hindi">मुसळवाडी, राहुरी</p>
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-2 text-white/80">
+                        <MapPin className="h-4 w-4" />
+                        <p className="text-lg">
+                          Shri Swayambhu Ekadash Rudra Bhumi
+                          <p className="text-lg">Musalwadi, Rahuri</p>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 pl-6 md:pl-0"></div>
+
+                    {/* Date Section */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
+                      <div className="flex items-center space-x-2 text-white/80">
+                        <Calendar className="h-4 w-4" />
+                        <p className="text-lg hindi">
+                          31 जानेवारी ते 2 फेब्रुवारी 2025
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-2 text-white/80">
+                        <Calendar className="h-4 w-4" />
+                        <p className="text-lg">
+                          January 31 to February 2, 2025
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* YouTube Broadcast Section */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
+                      <div className="flex items-center space-x-2">
+                        <YoutubeIcon className="h-4 w-4" />
+                        <p className="text-base hindi">
+                          यूट्यूब चैनल के माध्यम से श्री एकादश रुद्र ध्यान सत्र
+                          एवं पूजा हवन लाइव प्रसारण
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Youtube className="h-4 w-4" />
+                        <p className="text-base">
+                          Live broadcast of Shri Ekadash Rudra meditation
+                          session and Puja Havan via YouTube channel
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Join Button */}
                   <Button
                     variant="secondary"
                     size="lg"
-                    className="w-full"
+                    className="w-full mt-8 transition-colors duration-200"
                     asChild
                   >
                     <a
                       href={additionalContent.joinNextSessionLink}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="flex items-center justify-center space-x-2"
                     >
-                      Join Virtual Session
+                      <span>Join Virtual Session</span>
                     </a>
                   </Button>
+
+                  {/* Bottom Banner */}
+                  <div className="mt-8 pt-4 border-t border-white/20 text-center">
+                    <p className="text-sm text-white/80">
+                      International Sahaja Yoga Meditation Center |
+                      आंतरराष्ट्रीय सहज योग ध्यान केंद्र
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
 
