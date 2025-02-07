@@ -118,7 +118,7 @@ const EkadashRudraLanding = () => {
 
                 <Button size="lg" className=" px-12 py-6 text-lg" asChild>
                   <a
-                    href="https://forms.eduqfix.com/rahuwof/add"
+                    href="https://form.qfixonline.com/rahuriform"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
