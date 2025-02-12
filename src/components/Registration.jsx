@@ -11,6 +11,7 @@ import {
   Building,
   Copy,
 } from "lucide-react";
+import RegistrationCard from "./RegistrationCard";
 
 const Registration = () => {
   return (
@@ -23,7 +24,7 @@ const Registration = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-5xl font-bold text-primary mb-4">
-            Begin Your Journey of Self-Discovery
+            Donation towards Self-Discovery
           </h2>
           <p className="text-xl text-secondary-foreground max-w-2xl mx-auto">
             Experience the transformative power of Sahaja Yoga meditation in our
@@ -39,7 +40,7 @@ const Registration = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="border-2 border-primary/10 backdrop-blur-sm">
+            {/* <Card className="border-2 border-primary/10 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-primary">
                   Join Our Meditation Sessions
@@ -84,7 +85,8 @@ const Registration = () => {
                   through Sahaja Yoga
                 </p>
               </CardContent>
-            </Card>
+            </Card> */}
+            <RegistrationCard/>
           </motion.div>
 
           {/* Donation Card */}
