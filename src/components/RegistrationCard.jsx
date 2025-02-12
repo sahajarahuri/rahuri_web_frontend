@@ -18,19 +18,6 @@ const RegistrationCard = () => {
       id="registration"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-5xl font-bold text-primary mb-4">
-          International Shri Ekadash Rudra Center
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Experience a transformative spiritual journey in the heart of Rahuri
-          </p>
-        </motion.div>
 
         <div className="flex flex-col gap-8 items-center">
           <motion.div

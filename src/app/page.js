@@ -13,9 +13,9 @@ export default function Home() {
     <main className="bg-background">
       <Navbar />
       <Hero />
-      <Registration />
       {/* <About /> */}
       <Video/>
+      <Registration />
       <Schedule />
       <Contact />
       <Footer />
