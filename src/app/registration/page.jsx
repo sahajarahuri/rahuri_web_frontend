@@ -81,7 +81,7 @@ const EkadashRudraLanding = () => {
         className="container mx-auto px-4 py-8"
       >
         {/* Hero Section */}
-        <section className="text-center mb-16">
+        {/* <section className="text-center mb-16">
           <motion.h1
             className="text-5xl font-extrabold mb-4 text-primary bg-clip-text  bg-gradient-to-r from-primary to-secondary"
             initial={{ y: -50, opacity: 0 }}
@@ -98,7 +98,7 @@ const EkadashRudraLanding = () => {
           >
             Join us for a transformative spiritual experience
           </motion.p>
-        </section>
+        </section> */}
 
         <motion.div
           className="my-8"
@@ -111,8 +111,7 @@ const EkadashRudraLanding = () => {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    Register now for Shri Ekadash Rudra Meditation, Pooja and
-                    Havan
+                    Contribute for Shri Ekadash Rudra, Rahuri.
                   </h3>
                 </div>
 
@@ -123,7 +122,7 @@ const EkadashRudraLanding = () => {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
                   >
-                    Register Now
+                    Donate Now
                   </a>
                 </Button>
               </div>
@@ -134,7 +133,7 @@ const EkadashRudraLanding = () => {
         {/* Main Content */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Left Column */}
-          <div>
+          {/* <div>
             <motion.img
               src="/images/poster.jpg"
               alt="Event Poster"
@@ -143,14 +142,14 @@ const EkadashRudraLanding = () => {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8 }}
             />
-          </div>
+          </div> */}
 
           {/* Right Column */}
           <div className="space-y-8">
-            <VenuesCard />
-            <PricingCard />
-            <ContactCard contacts={contacts} />
-            <ScheduleCard scheduleData={scheduleData} />
+            {/* <VenuesCard /> */}
+            {/* <PricingCard /> */}
+            {/* <ContactCard contacts={contacts} /> */}
+            {/* <ScheduleCard scheduleData={scheduleData} /> */}
           </div>
         </div>
 

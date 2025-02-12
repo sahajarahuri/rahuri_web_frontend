@@ -25,7 +25,7 @@ const RegistrationCard = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-5xl font-bold text-primary mb-4">
-            Join the International Shri Ekadash Rudra Camp 2025
+          International Shri Ekadash Rudra Center
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Experience a transformative spiritual journey in the heart of Rahuri
@@ -45,12 +45,12 @@ const RegistrationCard = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center text-muted-foreground">
+                {/* <div className="flex items-center text-muted-foreground">
                   <CalendarDays className="mr-3 h-5 w-5 text-primary" />
                   <span>
                     5-day immersive spiritual experience (Jan 30 - Feb 3, 2025)
                   </span>
-                </div>
+                </div> */}
                 <div className="flex items-center text-muted-foreground">
                   <MapPin className="mr-3 h-5 w-5 text-primary" />
                   <span>
@@ -86,12 +86,12 @@ const RegistrationCard = () => {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center"
               >
-                Register Now
+                Donate Now
               </a>
             </Button>
 
             <p className="text-sm text-center text-muted-foreground">
-              Secure your spot for this spiritually enriching event and embark
+              Contibute for this spiritually enriching event and embark
               on a journey of self-discovery
             </p>
           </motion.div>
