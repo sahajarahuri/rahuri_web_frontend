@@ -72,7 +72,7 @@ const RegistrationCard = () => {
           >
             <Button size="lg" className="w-full py-6 text-lg" asChild>
               <a
-                href="https://forms.eduqfix.com/rahuwof/add"
+                href="https://form.qfixonline.com/rahuriform"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center"
