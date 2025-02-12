@@ -35,7 +35,7 @@ const Contact = () => {
       icon: MapPin,
       title: "Address",
       content:
-        "International Sahaja Yoga Meditation Center, Shree Swayambhu Ekadash Rudra Bhumi, Musalwadi, Near Rahuri Lake, Musalwadi",
+        "International Sahaja Yoga Meditation Center, Shri Swayambhu Ekadash Rudra Bhumi, Musalwadi, Near Rahuri Lake, Musalwadi",
       link: "https://maps.app.goo.gl/Wxr2HVuQFtir4Dy9A",
     },
   ];

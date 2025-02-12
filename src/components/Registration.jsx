@@ -27,8 +27,7 @@ const Registration = () => {
             Donation towards Self-Discovery
           </h2>
           <p className="text-xl text-secondary-foreground max-w-2xl mx-auto">
-            Experience the transformative power of Sahaja Yoga meditation in our
-            peaceful sanctuary
+          ✨ Come, let's contribute to the development of this divine place and be a part of the spiritual journey.
           </p>
         </motion.div>
 

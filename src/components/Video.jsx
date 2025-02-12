@@ -6,12 +6,12 @@ export function Video() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
-            Ekadash Rudra: A Sacred Journey
+            Shri Ekadash Rudra: A Sacred Journey
           </h1>
 
           <p className="text-lg md:text-xl text-center text-gray-600 dark:text-gray-300 mb-8">
             Discover the ancient traditions and spiritual significance of Rahuri
-            and the Ekadash Rudra ceremony
+            and the Shri Ekadash Rudra ceremony
           </p>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 md:p-8">
