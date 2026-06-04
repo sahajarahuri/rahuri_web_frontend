@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
+import { SignJWT } from 'jose'
 import clientPromise from '@/lib/mongodb'
 
 export async function POST(request) {
@@ -20,7 +20,10 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
 
-  const token = sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' })
+  const token = await new SignJWT({ email: user.email })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setExpirationTime('1h')
+    .sign(new TextEncoder().encode(process.env.JWT_SECRET))
 
   return NextResponse.json({ token })
 }

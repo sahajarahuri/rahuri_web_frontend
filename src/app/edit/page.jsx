@@ -48,43 +48,49 @@ export default function EditPage() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800">
-        <Card className="w-full max-w-md border-none shadow-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-zinc-900 to-zinc-600 bg-clip-text text-transparent dark:from-zinc-100 dark:to-zinc-400">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50/80 via-background to-orange-100/50 dark:from-zinc-950 dark:to-zinc-900 mandala-bg p-4">
+        <Card className="w-full max-w-md border border-primary/20 shadow-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md rounded-[2rem] overflow-hidden">
+          <div className="h-2 bg-gradient-to-r from-primary via-amber-500 to-primary" />
+          <CardHeader className="space-y-2 pt-8 pb-6 text-center">
+            <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+              <span className="text-primary font-bold text-xl">ॐ</span>
+            </div>
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-amber-700 bg-clip-text text-transparent">
               Welcome Back
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-zinc-600 dark:text-zinc-400">
               Enter your credentials to access the schedule editor
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleLogin} className="space-y-6">
+          <CardContent className="px-8 pb-8">
+            <form onSubmit={handleLogin} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-zinc-700 dark:text-zinc-300 font-medium">Email</Label>
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="border-zinc-200 focus:ring-2 focus:ring-zinc-500"
+                  className="border-primary/20 focus-visible:ring-primary rounded-xl"
+                  placeholder="admin@example.com"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-zinc-700 dark:text-zinc-300 font-medium">Password</Label>
                 <Input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="border-zinc-200 focus:ring-2 focus:ring-zinc-500"
+                  className="border-primary/20 focus-visible:ring-primary rounded-xl"
+                  placeholder="••••••••"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-zinc-900 to-zinc-700 hover:from-zinc-800 hover:to-zinc-600 text-white"
+                className="w-full bg-primary hover:bg-primary/95 text-white font-semibold py-6 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px] active:translate-y-[1px]"
               >
                 Sign In
               </Button>
@@ -95,24 +101,29 @@ export default function EditPage() {
     );
   }
 
- return (
-   <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800 p-6">
-     <div className="max-w-7xl mx-auto">
-       <div className="flex justify-between items-center mb-8">
-         <h1 className="text-3xl font-bold bg-gradient-to-r from-zinc-900 to-zinc-600 bg-clip-text text-transparent dark:from-zinc-100 dark:to-zinc-400">
-           Schedule Editor
-         </h1>
-         <Button
-           onClick={handleLogout}
-           variant="ghost"
-           className="flex items-center space-x-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-         >
-           <LogOut className="h-4 w-4" />
-           <span>Sign Out</span>
-         </Button>
-       </div>
-       <EditableSchedule />
-     </div>
-   </div>
- );
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-orange-50/40 via-background to-orange-100/20 dark:from-zinc-950 dark:to-zinc-900 p-4 md:p-8 mandala-bg">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md px-6 py-4 rounded-[1.5rem] border border-primary/10 shadow-md">
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-amber-700 bg-clip-text text-transparent">
+              Schedule Editor
+            </h1>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              Manage sessions, page text, and resources for Rahuri Center
+            </p>
+          </div>
+          <Button
+            onClick={handleLogout}
+            variant="ghost"
+            className="flex items-center space-x-2 text-primary hover:text-primary hover:bg-primary/10 dark:hover:bg-primary/20 rounded-xl px-4 py-2 border border-primary/20"
+          >
+            <LogOut className="h-4 w-4" />
+            <span className="font-semibold text-sm">Sign Out</span>
+          </Button>
+        </div>
+        <EditableSchedule />
+      </div>
+    </div>
+  );
 }

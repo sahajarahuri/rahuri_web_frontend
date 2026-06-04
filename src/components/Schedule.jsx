@@ -14,10 +14,30 @@ const Schedule = () => {
     joinNextSessionLink: "",
     sacredResources: [],
   });
+  const [scheduleContent, setScheduleContent] = useState({
+    headingEn: "Weekly Meditation Schedule",
+    headingHi: "साप्ताहिक ध्यान कार्यक्रम",
+    subtitleEn: "Join our sacred meditation sessions every Thursday on YouTube.",
+    subtitleHi: "हर गुरुवार यूट्यूब पर हमारे पवित्र ध्यान सत्र में शामिल हों।",
+    centerNameEn: "Sahaja Yoga Meditation Center",
+    centerNameHi: "सहज योग ध्यान केंद्र",
+    addressEn: "Shri Swayambhu Ekadash Rudra Bhumi, Musalwadi, Rahuri",
+    addressHi: "श्री स्वयंभू एकादश रुद्र भूमी, मुसळवाडी, राहुरी",
+    dateRangeEn: "January 31 to February 2, 2025",
+    dateRangeHi: "31 जानेवारी ते 2 फेब्रुवारी 2025",
+    youtubeDescEn: "Live broadcast of Shri Ekadash Rudra meditation session and Puja Havan via YouTube channel",
+    youtubeDescHi: "यूट्यूब चैनल के माध्यम से श्री एकादश रुद्र ध्यान सत्र एवं पूजा हवन लाइव प्रसारण",
+    joinSessionLink: "",
+    bannerTextEn: "International Sahaja Yoga Meditation Center",
+    bannerTextHi: "आंतरराष्ट्रीय सहज योग ध्यान केंद्र",
+    officialWebsiteUrl: "https://Rahurisahajyoga.com",
+    documentaryUrl: "https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB",
+  });
 
   useEffect(() => {
     fetchSessions();
     fetchAdditionalContent();
+    fetchScheduleContent();
   }, []);
 
   const fetchSessions = async () => {
@@ -38,6 +58,16 @@ const Schedule = () => {
       setAdditionalContent(data);
     } catch (error) {
       console.error("Error fetching additional content:", error);
+    }
+  };
+
+  const fetchScheduleContent = async () => {
+    try {
+      const response = await fetch("/api/schedule");
+      const data = await response.json();
+      setScheduleContent(data);
+    } catch (error) {
+      console.error("Error fetching schedule content:", error);
     }
   };
 
@@ -66,10 +96,10 @@ const Schedule = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-4xl font-bold text-primary mb-4">
-            Weekly Meditation Schedule
+            {scheduleContent.headingEn}
           </h2>
           <p className="text-xl text-secondary-foreground max-w-2xl mx-auto">
-            Join our sacred meditation sessions every Thursday on YouTube.
+            {scheduleContent.subtitleEn}
           </p>
         </motion.div>
 
@@ -159,7 +189,7 @@ const Schedule = () => {
                   <div className="flex justify-center items-center space-x-3 mb-8 py-3 border-b border-white/20">
                     <Map className="h-6 w-6" />
                     <h3 className="text-xl font-medium">
-                      Sahaja Yoga Meditation Center | सहज योग ध्यान केंद्र
+                      {scheduleContent.centerNameEn} | {scheduleContent.centerNameHi}
                     </h3>
                   </div>
 
@@ -170,15 +200,13 @@ const Schedule = () => {
                       <div className="flex items-center space-x-2 text-white/80">
                         <MapPin className="h-4 w-4" />
                         <p className="text-lg hindi">
-                          श्री स्वयंभू एकादश रुद्र भूमी
-                          <p className="text-lg hindi">मुसळवाडी, राहुरी</p>
+                          {scheduleContent.addressHi}
                         </p>
                       </div>
                       <div className="flex items-center space-x-2 text-white/80">
                         <MapPin className="h-4 w-4" />
                         <p className="text-lg">
-                          Shri Swayambhu Ekadash Rudra Bhumi
-                          <p className="text-lg">Musalwadi, Rahuri</p>
+                          {scheduleContent.addressEn}
                         </p>
                       </div>
                     </div>
@@ -190,13 +218,13 @@ const Schedule = () => {
                       <div className="flex items-center space-x-2 text-white/80">
                         <Calendar className="h-4 w-4" />
                         <p className="text-lg hindi">
-                          31 जानेवारी ते 2 फेब्रुवारी 2025
+                          {scheduleContent.dateRangeHi}
                         </p>
                       </div>
                       <div className="flex items-center space-x-2 text-white/80">
                         <Calendar className="h-4 w-4" />
                         <p className="text-lg">
-                          January 31 to February 2, 2025
+                          {scheduleContent.dateRangeEn}
                         </p>
                       </div>
                     </div>
@@ -206,15 +234,13 @@ const Schedule = () => {
                       <div className="flex items-center space-x-2">
                         <YoutubeIcon className="h-4 w-4" />
                         <p className="text-base hindi">
-                          यूट्यूब चैनल के माध्यम से श्री एकादश रुद्र ध्यान सत्र
-                          एवं पूजा हवन लाइव प्रसारण
+                          {scheduleContent.youtubeDescHi}
                         </p>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Youtube className="h-4 w-4" />
                         <p className="text-base">
-                          Live broadcast of Shri Ekadash Rudra meditation
-                          session and Puja Havan via YouTube channel
+                          {scheduleContent.youtubeDescEn}
                         </p>
                       </div>
                     </div>
@@ -228,7 +254,7 @@ const Schedule = () => {
                     asChild
                   >
                     <a
-                      href={additionalContent.joinNextSessionLink}
+                      href={scheduleContent.joinSessionLink || additionalContent.joinNextSessionLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center space-x-2"
@@ -240,8 +266,8 @@ const Schedule = () => {
                   {/* Bottom Banner */}
                   <div className="mt-8 pt-4 border-t border-white/20 text-center">
                     <p className="text-sm text-white/80">
-                      International Sahaja Yoga Meditation Center |
-                      आंतरराष्ट्रीय सहज योग ध्यान केंद्र
+                      {scheduleContent.bannerTextEn} |
+                      {scheduleContent.bannerTextHi}
                     </p>
                   </div>
                 </CardContent>
@@ -287,7 +313,7 @@ const Schedule = () => {
                       className="w-full justify-start"
                     >
                       <a
-                        href="https://Rahurisahajyoga.com"
+                        href={scheduleContent.officialWebsiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center"
@@ -302,7 +328,7 @@ const Schedule = () => {
                       className="w-full justify-start"
                     >
                       <a
-                        href="https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB"
+                        href={scheduleContent.documentaryUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center"

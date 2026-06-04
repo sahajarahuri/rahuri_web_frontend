@@ -13,8 +13,8 @@ async function createAdminUser() {
     const db = client.db("sahaja_yoga");
     const users = db.collection("users");
 
-    const email = "ankurauti@gmail.com";
-    const password = "Ankur@382";
+    const email = "sahajayogarahuri@gmail.com";
+    const password = "Rahuri@123";
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const result = await users.updateOne(

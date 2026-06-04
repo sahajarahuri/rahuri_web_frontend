@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+  import { NextResponse } from 'next/server'
 import clientPromise from '@/lib/mongodb'
 import { jwtVerify } from 'jose'
 
@@ -19,8 +19,8 @@ async function verifyToken(request) {
 export async function GET() {
   const client = await clientPromise
   const db = client.db('sahaja_yoga')
-  const content = await db.collection('content').findOne({})
-  return NextResponse.json(content || {})
+  const schedule = await db.collection('schedule').findOne({})
+  return NextResponse.json(schedule || {})
 }
 
 export async function PUT(request) {
@@ -32,7 +32,6 @@ export async function PUT(request) {
   const data = await request.json()
   const client = await clientPromise
   const db = client.db('sahaja_yoga')
-  await db.collection('content').updateOne({}, { $set: data }, { upsert: true })
+  await db.collection('schedule').updateOne({}, { $set: data }, { upsert: true })
   return NextResponse.json({ success: true })
 }
-

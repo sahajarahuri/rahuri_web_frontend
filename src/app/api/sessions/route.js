@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '@/lib/mongodb'
 import { ObjectId } from 'mongodb'
-import { verify } from 'jsonwebtoken'
+import { jwtVerify } from 'jose'
 
 async function verifyToken(request) {
   const token = request.headers.get('Authorization')?.split(' ')[1]
@@ -9,7 +9,9 @@ async function verifyToken(request) {
     return null
   }
   try {
-    return verify(token, process.env.JWT_SECRET)
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+    const { payload } = await jwtVerify(token, secret)
+    return payload
   } catch (error) {
     return null
   }
