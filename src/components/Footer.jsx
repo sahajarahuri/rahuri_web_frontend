@@ -68,7 +68,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-16 pt-8 text-center">
           <p className="text-gray-400">
-            &copy; 2024 Sahaja Yoga Meditation. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Sahaja Yoga Meditation. All Rights Reserved.
           </p>
         </div>
       </div>
