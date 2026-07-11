@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { format } from "date-fns";
 import { Eclipse, Lightbulb, Bed, Map, ExternalLink, Youtube, ArrowRight, MapPin, Calendar, YoutubeIcon } from "lucide-react";
+import { useSettings } from "@/hooks/use-settings";
 
 const Schedule = () => {
+  const { settings } = useSettings();
   const [sessions, setSessions] = useState([]);
   const [additionalContent, setAdditionalContent] = useState({
     joinNextSessionLink: "",
@@ -85,7 +87,7 @@ const Schedule = () => {
 
   return (
     <section
-      className="section-min-height py-20 flex items-center bg-gradient-to-br from-secondary to-background"
+      className="section-min-height py-20 flex items-center bg-background"
       id="schedule"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,9 +113,12 @@ const Schedule = () => {
           >
             <Card className="bg-white/80 backdrop-blur">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold text-primary mb-8">
+                <h3 className="text-2xl font-semibold text-primary mb-1">
                   Upcoming Sessions
                 </h3>
+                <h4 className="marathi text-lg font-medium text-primary/80 mb-8">
+                  आगामी सत्रे
+                </h4>
                 <div className="space-y-6">
                   {sessions?.map((session) => (
                     <Card
@@ -254,12 +259,13 @@ const Schedule = () => {
                     asChild
                   >
                     <a
-                      href={scheduleContent.joinSessionLink || additionalContent.joinNextSessionLink}
+                      href={settings.weeklyYoutubeUrl || scheduleContent.joinSessionLink || additionalContent.joinNextSessionLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center space-x-2"
                     >
                       <span>Join Virtual Session</span>
+                      <span className="marathi"> · व्हर्च्युअल सत्रात सामील व्हा</span>
                     </a>
                   </Button>
 
@@ -303,7 +309,10 @@ const Schedule = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl">Additional Links</CardTitle>
+                  <CardTitle className="text-xl">
+                  Additional Links
+                  <span className="marathi text-base font-normal text-muted-foreground block">अतिरिक्त दुवे</span>
+                </CardTitle>
                 </CardHeader>
                 <CardContent className="mt-3">
                   <div className="space-y-4">
@@ -319,7 +328,7 @@ const Schedule = () => {
                         className="inline-flex items-center"
                       >
                         <ExternalLink className="mr-2 h-4 w-4" /> Official
-                        Website
+                        Website <span className="marathi">· अधिकृत संकेतस्थळ</span>
                       </a>
                     </Button>
                     <Button
@@ -334,7 +343,7 @@ const Schedule = () => {
                         className="inline-flex items-center"
                       >
                         <Youtube className="mr-2 h-4 w-4" /> Watch Ekadash Rudra
-                        Documentary
+                        Documentary <span className="marathi">· एकादश रुद्र लघुपट पहा</span>
                       </a>
                     </Button>
                   </div>

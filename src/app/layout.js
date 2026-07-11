@@ -1,29 +1,34 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { EB_Garamond, Tiro_Devanagari_Marathi } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const garamond = EB_Garamond({
+  variable: "--font-garamond",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const marathi = Tiro_Devanagari_Marathi({
+  variable: "--font-marathi",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  subsets: ["latin", "devanagari"],
+  display: "swap",
 });
 
 export const metadata = {
-  title: "Sahaja Yoga Meditation",
-  description: "Discover inner peace through Sahaja Yoga meditation",
+  title: "Sahaja Yoga Meditation — Rahuri",
+  description:
+    "Sahaja Yoga meditation at Shri Swayambhu Ekadash Rudra Bhumi, Musalwadi, Rahuri. Freely given.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-        <Toaster/>
+      <body className={`${garamond.variable} ${marathi.variable} antialiased`}>
+        <Toaster />
         {children}
       </body>
     </html>

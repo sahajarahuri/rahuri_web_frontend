@@ -1,44 +1,53 @@
+"use client";
+
 import HeroVideoPlayer from "@/components/ui/hero-video-player";
+import { motion } from "framer-motion";
 
-export function Video() {
+export const Video = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
-            Shri Ekadash Rudra: A Sacred Journey
-          </h1>
-
-          <p className="text-lg md:text-xl text-center text-gray-600 dark:text-gray-300 mb-8">
-            Discover the ancient traditions and spiritual significance of Rahuri
-            and the Shri Ekadash Rudra ceremony
-          </p>
-
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 md:p-8">
-            <HeroVideoPlayer
-              animationStyle="from-center"
-              videoSrc="https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB"
-              thumbnailSrc="/images/tumbnail.jpg"
-              thumbnailAlt="Everything about Rahuri & Ekadash Rudra"
-              className="mb-8"
-            />
-
-            <div className="space-y-6 mt-8">
-              <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                About This Video
-              </h2>
-
-              <p className="text-gray-600 dark:text-gray-300">
-                This comprehensive guide takes you through the sacred traditions
-                of Rahuri and the profound significance of the Ekadash Rudra
-                ceremony. Learn about the ancient practices, spiritual
-                significance, and the transformative power of these sacred
-                rituals.
-              </p>
-            </div>
+    <section className="py-24 md:py-32 bg-background text-center border-t border-border">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9 }}
+          className="mb-10"
+        >
+          <div className="eyebrow mb-4">
+            A short film <span className="marathi normal-case tracking-normal">· एक लघुपट</span>
           </div>
-        </div>
+          <h2 className="text-3xl md:text-4xl font-medium text-primary mb-1">
+            Shri Ekadash Rudra
+          </h2>
+          <h3 className="marathi text-2xl md:text-3xl font-medium text-primary mb-3">
+            श्री एकादश रुद्र
+          </h3>
+          <p className="italic text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            On the sacred tradition of Rahuri and the Ekadash Rudra ceremony.
+          </p>
+          <p className="marathi not-italic text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            राहुरीच्या पवित्र परंपरेवर आणि एकादश रुद्र सोहळ्यावर आधारित.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1, delay: 0.1 }}
+          className="rounded-md overflow-hidden shadow-[0_4px_30px_hsl(30_20%_14%/0.1)] max-w-3xl mx-auto"
+        >
+          <HeroVideoPlayer
+            animationStyle="from-center"
+            videoSrc="https://youtu.be/SP1gMYwsjIA?si=gCC3hsP0mESZ68pB"
+            thumbnailSrc="/images/tumbnail.jpg"
+            thumbnailAlt="Everything about Rahuri & Ekadash Rudra"
+          />
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default Video;

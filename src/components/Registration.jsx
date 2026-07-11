@@ -1,153 +1,98 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  CalendarDays,
-  MapPin,
-  Heart,
-  Gift,
-  Building,
-  Copy,
-} from "lucide-react";
-import RegistrationCard from "./RegistrationCard";
 
-const Registration = () => {
+export default function Registration() {
+  const scrollToQr = () => {
+    const el = document.getElementById("donate-details");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <section className="py-24 bg-card" id="register">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="register" className="py-24 md:py-32 bg-background border-t border-border">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9 }}
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-5xl font-bold text-primary mb-4">
-            Donation towards Self-Discovery
+          <div className="eyebrow mb-4">
+            Contribute <span className="marathi normal-case tracking-normal">· योगदान द्या</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-medium text-primary mb-1">
+            Towards self-discovery
           </h2>
-          <p className="text-xl text-secondary-foreground max-w-2xl mx-auto">
-          ✨ Come, let's contribute to the development of this divine place and be a part of the spiritual journey.
+          <h3 className="marathi text-2xl md:text-3xl font-medium text-primary mb-3">
+            आत्मशोधाच्या दिशेने
+          </h3>
+          <p className="italic text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            Your contribution helps a sacred space serve meditation, prayer and
+            peace for all seekers.
+          </p>
+          <p className="marathi not-italic text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            तुमचे योगदान या पवित्र स्थळाला सर्व साधकांसाठी ध्यान, प्रार्थना व
+            शांती प्रदान करण्यास मदत करते.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-4 gap-8 items-start">
-          {/* Registration Card */}
-          <motion.div
-            className="lg:col-span-2"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {/* <Card className="border-2 border-primary/10 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-2xl font-semibold text-primary">
-                  Join Our Meditation Sessions
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center text-secondary-foreground">
-                  <CalendarDays className="mr-3 h-5 w-5 text-primary" />
-                  <span>Regular sessions available throughout the week</span>
-                </div>
-                <div className="flex items-center text-secondary-foreground">
-                  <MapPin className="mr-3 h-5 w-5 text-primary" />
-                  <span>Peaceful location with easy accessibility</span>
-                </div>
-                <div className="flex items-center text-secondary-foreground">
-                  <Heart className="mr-3 h-5 w-5 text-primary" />
-                  <span>Guided by experienced practitioners</span>
-                </div>
+        <motion.div
+          id="donate-details"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, delay: 0.1 }}
+          className="max-w-2xl mx-auto"
+        >
+          <div className="bg-card border border-border rounded-md p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+            <div className="w-40 h-40 md:w-44 md:h-44 rounded-md overflow-hidden shrink-0 bg-white p-1 border border-border">
+              <Image
+                src="/images/QR.jpg"
+                alt="Donation QR code"
+                width={200}
+                height={200}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="text-sm md:text-base leading-relaxed text-foreground/90 text-center md:text-left">
+              <div>
+                <span className="italic text-muted-foreground">Account</span>
+                <span className="marathi not-italic text-muted-foreground"> / खाते:</span>{" "}
+                Rahuri Sahajyog Welfare Society
+              </div>
+              <div>
+                <span className="italic text-muted-foreground">A/c No</span>
+                <span className="marathi not-italic text-muted-foreground"> / खाते क्र.:</span>{" "}
+                50100760322286
+              </div>
+              <div>
+                <span className="italic text-muted-foreground">IFSC</span>
+                <span className="marathi not-italic text-muted-foreground"> / आयएफएससी:</span>{" "}
+                HDFC0004295 · Ahmednagar
+              </div>
+              <div className="italic text-xs text-muted-foreground mt-3">
+                Scan the QR with any UPI app, or transfer directly.
+              </div>
+              <div className="marathi not-italic text-xs text-muted-foreground">
+                कोणत्याही UPI अ‍ॅपने QR स्कॅन करा, किंवा थेट रक्कम पाठवा.
+              </div>
+            </div>
+          </div>
 
-                <div className="bg-primary/5 rounded-lg p-6 text-center mt-6">
-                  <p className="text-2xl font-bold text-primary mb-2">
-                    Upcoming Pooja & Havan
-                  </p>
-                  <p className="text-sm text-secondary-foreground">
-                    International Shri Ekadash Rudra Meditation, Pooja and Havan
-                  </p>
-                </div>
-
-                <Button size="lg" className="w-full py-6 text-lg" asChild>
-                  <a
-                    href="/registration"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center"
-                  >
-                    Register Here
-                  </a>
-                </Button>
-
-                <p className="text-sm text-center text-muted-foreground">
-                  Join hundreds of others who have discovered inner peace
-                  through Sahaja Yoga
-                </p>
-              </CardContent>
-            </Card> */}
-            <RegistrationCard/>
-          </motion.div>
-
-          {/* Donation Card */}
-          <motion.div
-            className="lg:col-span-2"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Card className="border-2 border-primary/10 backdrop-blur-sm">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-2xl font-semibold text-primary flex items-center gap-2">
-                  Donations
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-center p-2 bg-primary/5 rounded-lg">
-                  <img
-                    src="/images/QR.jpg"
-                    alt="Donation QR Code"
-                    className="w-64 h-64 object-contain"
-                  />
-                </div>
-
-                <div className="bg-primary/5 rounded-lg">
-                  <div className="flex flex-col bg-secondary/50 p-3 rounded-sm font-semibold">
-                    <p>
-                      <span className="text-primary">Account Name:</span> Rahuri
-                      Sahajyog Welfare Society
-                    </p>
-                    <p>
-                      <span className="text-primary">Account No.:</span>{" "}
-                      50100760322286
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm p-3">
-                    <p>
-                      <span className="text-primary">IFSC:</span> HDFC0004295
-                    </p>
-                    <p>
-                      <span className="text-primary">Branch:</span> Ahmednagar
-                    </p>
-                    <p>
-                      <span className="text-primary">MICR:</span> 414240006
-                    </p>
-                    <p>
-                      <span className="text-primary">Code:</span> 04295
-                    </p>
-                  </div>
-                </div>
-
-                <p className="text-xs text-center text-muted-foreground">
-                  Your contribution helps maintain our centers and spread free
-                  meditation programs
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+          <div className="text-center mt-8">
+            <button
+              onClick={scrollToQr}
+              className="text-link italic text-base bg-transparent border-b border-accent"
+              type="button"
+            >
+              Donate online
+              <span className="marathi not-italic"> · ऑनलाइन देणगी द्या</span>
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
-};
-
-export default Registration;
+}

@@ -6,98 +6,141 @@
   font-family: Kurale;
   src: url(/fonts/Kurale.ttf);
 }
-
 @font-face {
   font-family: Sura;
   src: url(/fonts/Sura.ttf);
 }
 
 body {
-  font-family: Kurale, Helvetica, sans-serif;
+  font-family: 'EB Garamond', Kurale, Georgia, "Times New Roman", serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.hindi{
-  font-family: Sura;
+/* Marathi / Devanagari text — keeps legacy `hindi` class working too */
+.marathi,
+.hindi {
+  font-family: 'Tiro Devanagari Marathi', Sura, "Mangal", "Noto Sans Devanagari", system-ui, sans-serif;
 }
 
 @layer base {
   :root {
-    --background: 35 30% 95%;
-    --foreground: 20 15% 15%;
+    /* Warm ivory background — printed prayer-book */
+    --background: 41 40% 94%;
+    --foreground: 30 20% 14%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 20 15% 15%;
+    --card: 42 45% 97%;
+    --card-foreground: 30 20% 14%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 15% 15%;
+    --popover: 42 45% 97%;
+    --popover-foreground: 30 20% 14%;
 
-    --primary: 15 88% 41%; /* #C2410C */
-    --primary-foreground: 0 0% 100%;
+    /* Deep aged maroon — used sparingly as ink, not wallpaper */
+    --primary: 12 60% 28%;
+    --primary-foreground: 42 45% 97%;
 
-    --secondary: 24 25% 85%;
-    --secondary-foreground: 20 15% 15%;
+    /* Warm sand */
+    --secondary: 38 32% 88%;
+    --secondary-foreground: 30 22% 18%;
 
-    --muted: 15 20% 90%;
-    --muted-foreground: 15 20% 45%;
+    --muted: 40 26% 90%;
+    --muted-foreground: 34 15% 46%;
 
-    --accent: 15 88% 41%;
-    --accent-foreground: 0 0% 100%;
+    /* Aged gold — for hair-line rules and thin accents only */
+    --accent: 38 40% 54%;
+    --accent-foreground: 30 22% 14%;
 
-    --destructive: 0 75% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 55% 40%;
+    --destructive-foreground: 42 45% 97%;
 
-    --border: 20 15% 85%;
-    --input: 20 15% 85%;
-    --ring: 15 88% 41%;
+    --border: 38 30% 85%;
+    --input: 38 30% 85%;
+    --ring: 12 60% 28%;
 
-    --radius: 1.5rem;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 20 15% 10%;
-    --foreground: 35 30% 90%;
+    --background: 24 18% 8%;
+    --foreground: 42 32% 92%;
 
-    --card: 20 15% 10%;
-    --card-foreground: 35 30% 90%;
+    --card: 24 18% 11%;
+    --card-foreground: 42 32% 92%;
 
-    --popover: 20 15% 10%;
-    --popover-foreground: 35 30% 90%;
+    --popover: 24 18% 11%;
+    --popover-foreground: 42 32% 92%;
 
-    --primary: 15 88% 41%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 15 60% 46%;
+    --primary-foreground: 24 18% 8%;
 
-    --secondary: 24 20% 20%;
-    --secondary-foreground: 35 30% 90%;
+    --secondary: 24 14% 20%;
+    --secondary-foreground: 42 32% 92%;
 
-    --muted: 20 15% 20%;
-    --muted-foreground: 15 20% 65%;
+    --muted: 24 14% 18%;
+    --muted-foreground: 34 16% 68%;
 
-    --accent: 15 88% 41%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 38 40% 56%;
+    --accent-foreground: 24 22% 14%;
 
-    --destructive: 0 65% 30%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 55% 38%;
+    --destructive-foreground: 42 32% 92%;
 
-    --border: 20 15% 20%;
-    --input: 20 15% 20%;
-    --ring: 15 88% 41%;
+    --border: 24 12% 22%;
+    --input: 24 12% 22%;
+    --ring: 15 60% 46%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+
+  /* Refined serif headings */
+  h1, h2, h3, h4 {
+    font-family: 'EB Garamond', Kurale, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.005em;
   }
 }
 
-.mandala-bg {
-  background-image: url
-    (
-      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMSkiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+"
-    );
-
-  background-size: 300px 300px;
+/* Small utility classes */
+.eyebrow {
+  font-style: italic;
+  font-size: 12px;
+  color: hsl(var(--accent));
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
+
+.gold-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: center;
+  color: hsl(var(--accent));
+}
+.gold-rule::before,
+.gold-rule::after {
+  content: "";
+  flex: 1;
+  max-width: 90px;
+  height: 1px;
+  background: hsl(var(--accent));
+  opacity: 0.4;
+}
+
+.text-link {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  border-bottom: 0.5px solid hsl(var(--accent));
+  padding-bottom: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.text-link:hover {
+  color: hsl(var(--primary) / 0.75);
+  border-color: hsl(var(--primary));
+}
+
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 900ms ease, transform 900ms ease; }
+.fade-in.in { opacity: 1; transform: none; }

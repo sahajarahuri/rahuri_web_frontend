@@ -1,76 +1,55 @@
-import Link from "next/link";
-import { Facebook, Twitter, Instagram } from "lucide-react";
+"use client";
+
+import { useSettings } from "@/hooks/use-settings";
 
 const Footer = () => {
+  const { settings } = useSettings();
+
+  const socials = [
+    { url: settings.socialYoutubeUrl, label: "YouTube" },
+    { url: settings.socialFacebookUrl, label: "Facebook" },
+    { url: settings.socialInstagramUrl, label: "Instagram" },
+    { url: "https://www.sahajayoga.org", label: "Global Foundation" },
+  ].filter((s) => s.url);
+
   return (
-    <footer className="bg-gray-900 text-gray-300 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-12">
-          <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-white">About Us</h4>
-            <p className="text-gray-400">
-              Sahaja Yoga offers a unique method of meditation that helps you
-              achieve inner peace and balance.
-            </p>
-          </div>
+    <footer id="contact" className="bg-card border-t border-border py-14 md:py-16 text-center">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6">
+        <p className="italic text-sm md:text-base text-muted-foreground max-w-lg mx-auto mb-2 leading-relaxed">
+          Sahaja Yoga meditation is always given freely — a gift from H.H. Shri
+          Mataji Nirmala Devi to humanity.
+        </p>
+        <p className="marathi not-italic text-sm md:text-base text-muted-foreground max-w-lg mx-auto mb-6 leading-relaxed">
+          सहज योग ध्यान नेहमी विनामूल्य दिले जाते — प.पू. श्री माताजी निर्मला
+          देवी यांनी मानवतेला दिलेली एक अनमोल देणगी.
+        </p>
 
-          <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-white">Quick Links</h4>
-            <ul className="space-y-4">
-              {["Home", "About", "Schedule", "Contact"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-white">Resources</h4>
-            <ul className="space-y-4">
-              {["Meditation Guide", "FAQ", "Blog", "Events"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-6">
-            <h4 className="text-xl font-semibold text-white">Connect</h4>
-            <div className="flex space-x-4">
-              {[
-                { icon: Facebook, href: "#" },
-                { icon: Twitter, href: "#" },
-                { icon: Instagram, href: "#" },
-              ].map((social, index) => (
+        {socials.length > 0 && (
+          <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center text-sm text-primary mb-7">
+            {socials.map((s, i) => (
+              <span key={s.label} className="flex items-center gap-6">
                 <a
-                  key={index}
-                  href={social.href}
-                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-colors"
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary/70 transition-colors"
                 >
-                  <social.icon className="w-5 h-5" />
+                  {s.label}
                 </a>
-              ))}
-            </div>
+                {i < socials.length - 1 && (
+                  <span className="text-accent opacity-50" aria-hidden>·</span>
+                )}
+              </span>
+            ))}
           </div>
-        </div>
+        )}
 
-        <div className="border-t border-gray-800 mt-16 pt-8 text-center">
-          <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Sahaja Yoga Meditation. All Rights Reserved.
-          </p>
-        </div>
+        <p className="text-xs text-muted-foreground tracking-wider">
+          © {new Date().getFullYear()} · Rahuri Sahaja Yoga Meditation Center
+        </p>
+        <p className="marathi text-xs text-muted-foreground tracking-wide mt-0.5">
+          © {new Date().getFullYear()} · राहुरी सहज योग ध्यान केंद्र
+        </p>
       </div>
     </footer>
   );

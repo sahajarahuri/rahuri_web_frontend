@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Volunteer walkthrough — Rahuri Sahaja Yoga admin</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Tiro+Devanagari+Marathi&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2a241c; --mute: #7a6a55; --accent: #6d2616; --gold: #a98548;
+    --bg: #fdfaf2; --hair: #ece3cd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--ink); background: #fff;
+    line-height: 1.55; font-size: 12.5px;
+    max-width: 820px; margin: 0 auto; padding: 32px 40px;
+  }
+  .mr { font-family: 'Tiro Devanagari Marathi', serif; }
+  h1 { font-size: 24px; color: var(--accent); margin: 0 0 4px; font-weight: 500; }
+  h2 { font-size: 14.5px; color: var(--accent); margin: 22px 0 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; border-bottom: 0.5px solid var(--gold); padding-bottom: 3px; }
+  h3 { font-size: 13.5px; margin: 12px 0 4px; font-weight: 500; }
+  .sub { font-style: italic; font-size: 12px; color: var(--mute); margin: 0 0 10px; }
+  .head { border-bottom: 1px solid var(--gold); padding-bottom: 12px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: flex-end; }
+  ol, ul { padding-left: 20px; margin: 4px 0 8px; }
+  ol li, ul li { margin-bottom: 3px; }
+  .card { border: 0.5px solid var(--hair); border-radius: 4px; padding: 10px 14px; background: var(--bg); margin: 6px 0 10px; }
+  code, .url { font-family: 'Courier New', monospace; font-size: 11.5px; background: #f4ecd8; padding: 1px 5px; border-radius: 3px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .tip { border-left: 2px solid var(--gold); padding: 4px 12px; font-style: italic; font-size: 12px; color: var(--mute); margin: 6px 0; background: #fefbf1; }
+  .foot { margin-top: 24px; padding-top: 12px; border-top: 0.5px solid var(--hair); font-style: italic; font-size: 11px; color: var(--mute); text-align: center; }
+  @media print {
+    body { padding: 18px 28px; font-size: 11.5px; }
+    .noprint { display: none; }
+    h2 { margin-top: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <h1>Admin walkthrough</h1>
+    <div class="sub">A single-page guide for updating the Rahuri Sahaja Yoga website — no code needed.</div>
+  </div>
+  <div class="mr" style="color: var(--accent); font-size: 15px;">॥ जय श्री माताजी ॥</div>
+</div>
+
+<h2>Signing in</h2>
+<ol>
+  <li>Open the website in a browser and add <code>/edit</code> at the end of the address — e.g. <span class="url">rahurisahajyoga.com/edit</span>.</li>
+  <li>Sign in with the admin email and password.</li>
+  <li>You will see six tabs at the top: <b>Announcements · Sessions · Page Content · Resources · Testimonials · Site Settings</b>.</li>
+</ol>
+<div class="tip">Bookmark <code>/edit</code> in your browser so it opens with one tap.</div>
+
+<h2>Posting a new announcement (Puja, program, news)</h2>
+<div class="row">
+  <div>
+    <ol>
+      <li>Click the <b>Announcements</b> tab, then <b>New announcement</b>.</li>
+      <li>Type the title in <b>English</b>, and again in <b>Marathi</b>.</li>
+      <li>Add a description in both languages.</li>
+      <li>Optionally pick an <b>event date</b> from the calendar.</li>
+      <li>Add media (see the box on the right).</li>
+      <li>Click <b>Publish</b>.</li>
+    </ol>
+    <div class="tip">Turn on <b>Pin to top</b> for the most important announcement — it shows first.</div>
+  </div>
+  <div>
+    <h3>Adding media</h3>
+    <ul>
+      <li><b>Add Photo</b> → click <i>Upload photo</i>, pick from your phone/laptop. The site compresses it automatically.</li>
+      <li><b>Add YouTube</b> → paste a link like <code>youtu.be/…</code> or <code>youtube.com/watch?v=…</code>. The player appears automatically.</li>
+      <li><b>Add Link</b> → give it a button label (e.g. <i>Register here</i>) and paste the URL.</li>
+      <li><b>Add Video</b> → paste a direct video URL (use YouTube instead whenever possible).</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Every Thursday, before the online meditation</h2>
+<ol>
+  <li>Open the <b>Site Settings</b> tab.</li>
+  <li>Paste this week's live-stream link into <b>Weekly Thursday YouTube URL</b>.</li>
+  <li>Click <b>Save settings</b>.</li>
+</ol>
+<div class="card">
+  This single change updates two buttons on the homepage — "Join this Thursday" (inside the announcement) and "Join virtual session" (near the schedule). You do not need to touch anything else.
+</div>
+
+<h2>Editing testimonials ("Seekers speak")</h2>
+<ol>
+  <li>Open the <b>Testimonials</b> tab.</li>
+  <li>Click <b>Add</b>, type the quote, author name, and location.</li>
+  <li>Save. 2–4 testimonials look best on the homepage.</li>
+</ol>
+
+<h2>Updating social links or self-realisation video</h2>
+<ol>
+  <li>Open <b>Site Settings</b>.</li>
+  <li>Update the YouTube channel, Facebook, or Instagram URL. Blank fields simply hide from the footer.</li>
+  <li>The <b>self-realisation video</b> is what the hero button opens — a Shri Mataji video is set by default. Change only if the committee prefers a different one.</li>
+</ol>
+
+<h2>Common things to remember</h2>
+<ul>
+  <li>Pin no more than one or two announcements at a time.</li>
+  <li>Photos from a phone are fine — the site handles resizing automatically.</li>
+  <li>For videos, always prefer <b>YouTube</b> — it's free and better quality.</li>
+  <li>To hide something without deleting, turn its <b>Active</b> toggle off.</li>
+</ul>
+
+<div class="foot">
+  Save this page for reference. To print: <b>Ctrl / Cmd + P</b>.<br/>
+  For technical help, contact the website developer.
+</div>
+
+<button class="noprint" onclick="window.print()" style="position: fixed; top: 20px; right: 20px; padding: 8px 14px; border: 0.5px solid var(--gold); background: var(--bg); color: var(--accent); border-radius: 999px; font-family: inherit; font-size: 12px; cursor: pointer;">Print / Save as PDF</button>
+
+</body>
+</html>

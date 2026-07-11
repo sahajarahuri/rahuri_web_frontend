@@ -34,6 +34,10 @@ import { useToast } from "@/hooks/use-toast";
 import { DatePicker } from "@/components/ui/date-picker";
 import { TimePicker } from "@/components/ui/time-picker";
 import { format } from "date-fns";
+import AnnouncementsManager from "@/components/admin/AnnouncementsManager";
+import SiteSettingsManager from "@/components/admin/SiteSettingsManager";
+import TestimonialsManager from "@/components/admin/TestimonialsManager";
+import { Megaphone } from "lucide-react";
 
 const iconMapping = {
   EclipseIcon: { icon: Eclipse, label: "Morning Meditation (Eclipse)" },
@@ -295,18 +299,43 @@ const EditableSchedule = () => {
 
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="sessions" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-white/70 dark:bg-zinc-900/70 border border-primary/10 rounded-xl p-1 mb-8">
-          <TabsTrigger value="sessions" className="rounded-lg py-2.5 font-semibold text-sm">
-            Meditation Sessions
+      <Tabs defaultValue="announcements" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 bg-white/70 dark:bg-zinc-900/70 border border-primary/10 rounded-xl p-1 mb-8 gap-1">
+          <TabsTrigger value="announcements" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+            Announcements
           </TabsTrigger>
-          <TabsTrigger value="content" className="rounded-lg py-2.5 font-semibold text-sm">
-            Page Content (Bilingual)
+          <TabsTrigger value="sessions" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+            Sessions
           </TabsTrigger>
-          <TabsTrigger value="resources" className="rounded-lg py-2.5 font-semibold text-sm">
-            Links & Sacred Resources
+          <TabsTrigger value="content" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+            Page Content
+          </TabsTrigger>
+          <TabsTrigger value="resources" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+            Resources
+          </TabsTrigger>
+          <TabsTrigger value="testimonials" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+            Testimonials
+          </TabsTrigger>
+          <TabsTrigger value="settings" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+            Site&nbsp;Settings
           </TabsTrigger>
         </TabsList>
+
+        {/* ---------------- ANNOUNCEMENTS TAB ---------------- */}
+        <TabsContent value="announcements" className="outline-none">
+          <AnnouncementsManager />
+        </TabsContent>
+
+        {/* ---------------- TESTIMONIALS TAB ---------------- */}
+        <TabsContent value="testimonials" className="outline-none">
+          <TestimonialsManager />
+        </TabsContent>
+
+        {/* ---------------- SITE SETTINGS TAB ---------------- */}
+        <TabsContent value="settings" className="outline-none">
+          <SiteSettingsManager />
+        </TabsContent>
+
 
         {/* ---------------- SESSIONS TAB ---------------- */}
         <TabsContent value="sessions" className="space-y-6 outline-none">
@@ -817,8 +846,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>Hindi Heading (साप्ताहिक ध्यान कार्यक्रम)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>Marathi Heading (साप्ताहिक ध्यान कार्यक्रम)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Input
                       value={scheduleContent.headingHi}
@@ -843,8 +872,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>Hindi Subtitle (हर गुरुवार यूट्यूब...)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>Marathi Subtitle (हर गुरुवार यूट्यूब...)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Textarea
                       value={scheduleContent.subtitleHi}
@@ -881,8 +910,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>Center Name (Hindi - सहज योग ध्यान केंद्र)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>Center Name (Marathi - सहज योग ध्यान केंद्र)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Input
                       value={scheduleContent.centerNameHi}
@@ -907,8 +936,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>Hindi Address (श्री स्वयंभू एकादश...)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>Marathi Address (श्री स्वयंभू एकादश...)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Textarea
                       value={scheduleContent.addressHi}
@@ -933,8 +962,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>Date Range Description (Hindi - 31 जानेवारी...)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>Date Range Description (Marathi - 31 जानेवारी...)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Input
                       value={scheduleContent.dateRangeHi}
@@ -971,8 +1000,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>YouTube Broadcast Description (Hindi)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>YouTube Broadcast Description (Marathi)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Textarea
                       value={scheduleContent.youtubeDescHi}
@@ -997,8 +1026,8 @@ const EditableSchedule = () => {
                   </div>
                   <div className="space-y-2">
                     <Label className="font-semibold flex justify-between hindi">
-                      <span>Bottom Banner Footer (Hindi)</span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">HI</span>
+                      <span>Bottom Banner Footer (Marathi)</span>
+                      <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded">MR</span>
                     </Label>
                     <Input
                       value={scheduleContent.bannerTextHi}
