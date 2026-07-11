@@ -63,13 +63,25 @@ export default function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1.4, ease: "easeInOut" }}
           >
+            {/* Blurred, darkened backdrop fills the frame so no space is
+                ever empty — the photo above never needs to be cropped */}
+            <Image
+              src={GALLERY[index]}
+              alt=""
+              fill
+              aria-hidden="true"
+              sizes="100vw"
+              className="object-cover scale-110 blur-2xl opacity-60"
+            />
+            {/* The actual photo, shown in full — nothing cropped, no
+                matter whether it's landscape or portrait */}
             <Image
               src={GALLERY[index]}
               alt="Rahuri Sahaja Yoga gallery"
               fill
               priority={index === 0}
               sizes="100vw"
-              className="object-cover"
+              className="object-contain"
             />
           </motion.div>
         </AnimatePresence>
