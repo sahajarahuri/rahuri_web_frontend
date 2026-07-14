@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
-  Calendar, ExternalLink, Play, X, ChevronLeft, ChevronRight,
-  Megaphone, Pin,
+  Calendar, ExternalLink, Play, X, ChevronLeft, ChevronRight, Pin,
 } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 import {
   youTubeEmbedUrl,
   youTubeThumbnail,
@@ -24,9 +22,8 @@ export default function Announcements() {
         const r = await fetch("/api/announcements");
         const d = await r.json();
         const list = Array.isArray(d) ? d : [];
-        // Only show active ones
         setItems(list.filter((it) => it.active !== false));
-      } catch (e) {
+      } catch {
         setItems([]);
       } finally {
         setLoading(false);
@@ -34,40 +31,24 @@ export default function Announcements() {
     })();
   }, []);
 
-  if (loading) return null;
-  if (items.length === 0) return null;
+  if (loading || items.length === 0) return null;
 
   return (
-    <section
-      id="announcements"
-      className="py-24 md:py-32 bg-background border-t border-border"
-    >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.9 }}
-        >
-          <div className="eyebrow mb-4">
-            at our centre <span className="marathi normal-case tracking-normal">· आमच्या केंद्रात</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-medium text-primary mb-1">
-            Upcoming programmes
-          </h2>
-          <h3 className="marathi text-2xl md:text-3xl font-medium text-primary mb-3">
-            आगामी कार्यक्रम
-          </h3>
-          <p className="italic text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-            Pujas, meditations, gatherings — kept here for all seekers.
-          </p>
-          <p className="marathi not-italic text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-            पूजा, ध्यान, संमेलने — सर्व साधकांसाठी येथे ठेवलेले.
-          </p>
-        </motion.div>
+    <section id="announcements" className="relative py-24 md:py-32">
+      <div className="thread max-w-4xl mx-auto mb-24 md:mb-32" aria-hidden />
 
-        <div className="space-y-10">
+      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrowEn="At our centre"
+          eyebrowMr="आमच्या केंद्रात"
+          titleEn="Upcoming programmes"
+          titleMr="आगामी कार्यक्रम"
+          leadEn="Pujas, meditations, gatherings — kept here for all seekers."
+          leadMr="पूजा, ध्यान, संमेलने — सर्व साधकांसाठी येथे ठेवलेले."
+          className="mb-16"
+        />
+
+        <div className="space-y-8">
           {items.map((it, idx) => (
             <AnnouncementItem key={it._id} item={it} index={idx} />
           ))}
@@ -78,199 +59,231 @@ export default function Announcements() {
 }
 
 function AnnouncementItem({ item, index }) {
-  const photos = (item.media || []).filter((m) => m.kind === "photo" && m.src);
-  const videos = (item.media || []).filter((m) => m.kind === "video" && m.src);
-  const youtubes = (item.media || []).filter((m) => m.kind === "youtube" && m.src);
-  const links = (item.media || []).filter((m) => m.kind === "link" && m.src);
+  const media = item.media || [];
+  const photos = media.filter((m) => m.kind === "photo" && m.src);
+  const videos = media.filter((m) => m.kind === "video" && m.src);
+  const youtubes = media.filter((m) => m.kind === "youtube" && m.src);
+  const links = media.filter((m) => m.kind === "link" && m.src);
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: Math.min(index, 3) * 0.05 }}
+      transition={{
+        duration: 0.75,
+        delay: Math.min(index, 3) * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="leaf p-6 md:p-9"
     >
-      <Card className="overflow-hidden border border-primary/10 bg-card shadow-sm hover:shadow-md transition-shadow rounded-3xl">
-        <div className="p-6 md:p-8">
-          {/* Header */}
-          <div className="flex flex-wrap items-start gap-3 mb-4">
-            {item.pinned && (
-              <span className="inline-flex items-center gap-1 text-[11px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                <Pin className="h-3 w-3" />
-                Pinned
-              </span>
-            )}
-            {item.eventDate && (
-              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                <Calendar className="h-4 w-4 text-primary/70" />
-                {new Date(item.eventDate).toLocaleDateString(undefined, {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-            )}
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-x-6 mb-2">
-            {item.titleEn && (
-              <h3 className="text-2xl md:text-3xl font-bold text-primary leading-tight">
-                {item.titleEn}
-              </h3>
-            )}
-            {item.titleMr && (
-              <h3 className="text-2xl md:text-3xl font-bold text-primary leading-tight marathi">
-                {item.titleMr}
-              </h3>
-            )}
-          </div>
-
-          {(item.descriptionEn || item.descriptionMr) && (
-            <div className="grid md:grid-cols-2 gap-x-6 gap-y-3 mt-3 text-muted-foreground">
-              {item.descriptionEn && (
-                <p className="whitespace-pre-line">{item.descriptionEn}</p>
-              )}
-              {item.descriptionMr && (
-                <p className="whitespace-pre-line marathi">{item.descriptionMr}</p>
-              )}
-            </div>
+      {/* Meta row */}
+      {(item.pinned || item.eventDate) && (
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
+          {item.pinned && (
+            <span
+              className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-[hsl(var(--brass-deep))] px-2.5 py-1"
+              style={{ border: "1px solid hsl(var(--brass) / 0.45)" }}
+            >
+              <Pin className="h-3 w-3" />
+              Pinned
+            </span>
           )}
-
-          {/* YouTube videos */}
-          {youtubes.length > 0 && (
-            <div className="mt-6 grid sm:grid-cols-2 gap-4">
-              {youtubes.map((y) => (
-                <YouTubeCard key={y.id} item={y} />
-              ))}
-            </div>
-          )}
-
-          {/* Direct videos */}
-          {videos.length > 0 && (
-            <div className="mt-6 grid sm:grid-cols-2 gap-4">
-              {videos.map((v) => (
-                <VideoCard key={v.id} item={v} />
-              ))}
-            </div>
-          )}
-
-          {/* Photo gallery */}
-          {photos.length > 0 && (
-            <div className="mt-6">
-              <PhotoGallery photos={photos} />
-            </div>
-          )}
-
-          {/* Links */}
-          {links.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-2">
-              {links.map((l) => (
-                <Button
-                  key={l.id}
-                  asChild
-                  variant="outline"
-                  className="rounded-full border-primary/30 hover:bg-primary/5 text-primary"
-                >
-                  <a href={normaliseUrl(l.src)} target="_blank" rel="noopener noreferrer">
-                    {l.label || "Open link"}
-                    <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                  </a>
-                </Button>
-              ))}
-            </div>
+          {item.eventDate && (
+            <span className="inline-flex items-center gap-2 text-[13px] italic text-muted-foreground">
+              <Calendar className="h-[15px] w-[15px] text-[hsl(var(--brass))]" />
+              {new Date(item.eventDate).toLocaleDateString(undefined, {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
           )}
         </div>
-      </Card>
+      )}
+
+      {/* Titles, facing pages */}
+      <div className="grid md:grid-cols-2 gap-x-8 gap-y-1">
+        {item.titleEn && (
+          <h3 className="text-[24px] md:text-[28px] font-medium text-primary leading-snug">
+            {item.titleEn}
+          </h3>
+        )}
+        {item.titleMr && (
+          <h3 className="marathi text-[22px] md:text-[26px] font-medium text-primary/90 leading-snug">
+            {item.titleMr}
+          </h3>
+        )}
+      </div>
+
+      {(item.descriptionEn || item.descriptionMr) && (
+        <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 mt-5 text-muted-foreground text-[15px] leading-relaxed">
+          {item.descriptionEn && (
+            <p className="whitespace-pre-line">{item.descriptionEn}</p>
+          )}
+          {item.descriptionMr && (
+            <p className="whitespace-pre-line marathi leading-[1.85]">
+              {item.descriptionMr}
+            </p>
+          )}
+        </div>
+      )}
+
+      {youtubes.length > 0 && (
+        <div className="mt-8 grid sm:grid-cols-2 gap-5">
+          {youtubes.map((y) => <YouTubeCard key={y.id} item={y} />)}
+        </div>
+      )}
+
+      {videos.length > 0 && (
+        <div className="mt-8 grid sm:grid-cols-2 gap-5">
+          {videos.map((v) => <VideoCard key={v.id} item={v} />)}
+        </div>
+      )}
+
+      {photos.length > 0 && (
+        <div className="mt-8">
+          <PhotoGallery photos={photos} />
+        </div>
+      )}
+
+      {links.length > 0 && (
+        <div className="mt-8 flex flex-wrap gap-3">
+          {links.map((l) => (
+            <a
+              key={l.id}
+              href={normaliseUrl(l.src)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-brass !py-2.5 !px-5 !text-[13px]"
+            >
+              <span>{l.label || "Open link"}</span>
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          ))}
+        </div>
+      )}
     </motion.article>
   );
 }
 
-/* ---------------- YouTube tile with click-to-play ---------------- */
+function MediaFrame({ children, title, description }) {
+  return (
+    <figure
+      className="m-0 overflow-hidden group"
+      style={{ border: "1px solid hsl(var(--border))", borderRadius: 2 }}
+    >
+      <div className="relative aspect-video bg-[#1a1008]">{children}</div>
+      {(title || description) && (
+        <figcaption className="p-4 bg-card">
+          {title && (
+            <p className="text-[14px] text-foreground leading-snug">{title}</p>
+          )}
+          {description && (
+            <p className="text-[12.5px] italic text-muted-foreground mt-1">
+              {description}
+            </p>
+          )}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
 
 function YouTubeCard({ item }) {
   const [playing, setPlaying] = useState(false);
   const embed = youTubeEmbedUrl(item.src);
   const thumb = youTubeThumbnail(item.src, "hqdefault");
-
   if (!embed) return null;
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-border/60 bg-card">
-      <div className="relative aspect-video bg-black">
-        {playing ? (
-          <iframe
-            src={`${embed}?autoplay=1&rel=0`}
-            className="absolute inset-0 w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title={item.title || "YouTube video"}
-          />
-        ) : (
-          <button
-            onClick={() => setPlaying(true)}
-            className="group absolute inset-0 w-full h-full focus:outline-none"
-          >
-            {thumb && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={thumb} alt={item.title || ""} className="w-full h-full object-cover" />
-            )}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-              <div className="h-16 w-16 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <Play className="h-6 w-6 text-white fill-white ml-0.5" />
-              </div>
-            </div>
-          </button>
-        )}
-      </div>
-      {(item.title || item.description) && (
-        <div className="p-3">
-          {item.title && <p className="font-semibold text-sm text-foreground">{item.title}</p>}
-          {item.description && (
-            <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>
+    <MediaFrame title={item.title} description={item.description}>
+      {playing ? (
+        <iframe
+          src={`${embed}?autoplay=1&rel=0`}
+          className="absolute inset-0 w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title={item.title || "Video"}
+        />
+      ) : (
+        <button
+          onClick={() => setPlaying(true)}
+          className="group/play absolute inset-0 w-full h-full"
+          aria-label={`Play ${item.title || "video"}`}
+        >
+          {thumb && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={thumb}
+              alt=""
+              className="w-full h-full object-cover transition-transform [transition-duration:1200ms] group-hover/play:scale-[1.04]"
+            />
           )}
-        </div>
+          <span className="absolute inset-0 bg-black/25 group-hover/play:bg-black/15 transition-colors duration-500 grid place-items-center">
+            <span
+              className="grid place-items-center rounded-full transition-transform duration-500 group-hover/play:scale-110"
+              style={{
+                width: 62,
+                height: 62,
+                border: "1px solid rgba(233,207,149,0.8)",
+                background: "rgba(26,16,8,0.5)",
+                backdropFilter: "blur(4px)",
+              }}
+            >
+              <Play className="h-5 w-5 ml-0.5" style={{ fill: "#e9cf95", color: "#e9cf95" }} />
+            </span>
+          </span>
+        </button>
       )}
-    </div>
+    </MediaFrame>
   );
 }
-
-/* ---------------- Direct video tile ---------------- */
 
 function VideoCard({ item }) {
   return (
-    <div className="rounded-2xl overflow-hidden border border-border/60 bg-card">
-      <div className="relative aspect-video bg-black">
-        <video
-          src={normaliseUrl(item.src)}
-          poster={item.thumbnail || undefined}
-          controls
-          preload="metadata"
-          className="absolute inset-0 w-full h-full"
-        />
-      </div>
-      {(item.title || item.description) && (
-        <div className="p-3">
-          {item.title && <p className="font-semibold text-sm text-foreground">{item.title}</p>}
-          {item.description && (
-            <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>
-          )}
-        </div>
-      )}
-    </div>
+    <MediaFrame title={item.title} description={item.description}>
+      <video
+        src={normaliseUrl(item.src)}
+        poster={item.thumbnail || undefined}
+        controls
+        preload="metadata"
+        className="absolute inset-0 w-full h-full"
+      />
+    </MediaFrame>
   );
 }
-
-/* ---------------- Photo gallery with lightbox ---------------- */
 
 function PhotoGallery({ photos }) {
   const [openAt, setOpenAt] = useState(-1);
 
-  const close = () => setOpenAt(-1);
-  const prev = () => setOpenAt((i) => (i - 1 + photos.length) % photos.length);
-  const next = () => setOpenAt((i) => (i + 1) % photos.length);
+  const close = useCallback(() => setOpenAt(-1), []);
+  const prev = useCallback(
+    () => setOpenAt((i) => (i - 1 + photos.length) % photos.length),
+    [photos.length]
+  );
+  const next = useCallback(
+    () => setOpenAt((i) => (i + 1) % photos.length),
+    [photos.length]
+  );
 
-  // Decide a sensible grid based on count
+  // Keyboard control for the lightbox
+  useEffect(() => {
+    if (openAt < 0) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [openAt, close, prev, next]);
+
   const gridCls =
     photos.length === 1
       ? "grid-cols-1"
@@ -287,14 +300,21 @@ function PhotoGallery({ photos }) {
           <button
             key={p.id}
             onClick={() => setOpenAt(i)}
-            className="group aspect-square rounded-2xl overflow-hidden bg-muted border border-border/60 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="group relative aspect-square overflow-hidden bg-muted"
+            style={{ border: "1px solid hsl(var(--border))", borderRadius: 2 }}
+            aria-label={`Open photograph ${i + 1}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={p.src}
               alt={p.description || p.title || ""}
-              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
               loading="lazy"
+              className="w-full h-full object-cover transition-transform ease-out [transition-duration:1400ms] group-hover:scale-[1.07]"
+            />
+            <span
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{ boxShadow: "inset 0 0 0 1px hsl(var(--brass) / 0.9)" }}
+              aria-hidden
             />
           </button>
         ))}
@@ -302,47 +322,66 @@ function PhotoGallery({ photos }) {
 
       {openAt >= 0 && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+          style={{ background: "rgba(20,12,6,0.92)", backdropFilter: "blur(8px)" }}
           onClick={close}
+          role="dialog"
+          aria-modal="true"
         >
           <button
             onClick={close}
-            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+            className="absolute top-5 right-5 h-11 w-11 grid place-items-center text-[#e9cf95] hover:bg-white/10 transition-colors"
+            style={{ border: "1px solid rgba(233,207,149,0.45)" }}
             aria-label="Close"
           >
             <X className="h-5 w-5" />
           </button>
+
           {photos.length > 1 && (
             <>
               <button
                 onClick={(e) => { e.stopPropagation(); prev(); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
-                aria-label="Previous"
+                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 h-12 w-12 grid place-items-center text-[#e9cf95] hover:bg-white/10 transition-colors"
+                style={{ border: "1px solid rgba(233,207,149,0.45)" }}
+                aria-label="Previous photograph"
               >
                 <ChevronLeft className="h-6 w-6" />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); next(); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
-                aria-label="Next"
+                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 h-12 w-12 grid place-items-center text-[#e9cf95] hover:bg-white/10 transition-colors"
+                style={{ border: "1px solid rgba(233,207,149,0.45)" }}
+                aria-label="Next photograph"
               >
                 <ChevronRight className="h-6 w-6" />
               </button>
             </>
           )}
-          <div onClick={(e) => e.stopPropagation()} className="max-w-5xl max-h-[85vh]">
+
+          <motion.figure
+            key={openAt}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
+            className="m-0 max-w-5xl"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={photos[openAt].src}
               alt={photos[openAt].description || photos[openAt].title || ""}
-              className="max-w-full max-h-[85vh] object-contain rounded-2xl"
+              className="max-w-full max-h-[80vh] object-contain"
+              style={{ border: "1px solid rgba(233,207,149,0.3)" }}
             />
-            {photos[openAt].title && (
-              <p className="text-center text-white/90 text-sm mt-3">
-                {photos[openAt].title}
+            <figcaption className="text-center mt-4">
+              {photos[openAt].title && (
+                <p className="text-[#e9cf95] text-[14px]">{photos[openAt].title}</p>
+              )}
+              <p className="text-[11px] tracking-[0.2em] uppercase mt-1.5" style={{ color: "rgba(233,207,149,0.5)" }}>
+                {openAt + 1} / {photos.length}
               </p>
-            )}
-          </div>
+            </figcaption>
+          </motion.figure>
         </div>
       )}
     </>

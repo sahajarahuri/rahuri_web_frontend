@@ -129,8 +129,9 @@ const EditableSchedule = () => {
         centerNameHi: data.centerNameHi || "सहज योग ध्यान केंद्र",
         addressEn: data.addressEn || "Shri Swayambhu Ekadash Rudra Bhumi, Musalwadi, Rahuri",
         addressHi: data.addressHi || "श्री स्वयंभू एकादश रुद्र भूमी, मुसळवाडी, राहुरी",
-        dateRangeEn: data.dateRangeEn || "January 31 to February 2, 2025",
-        dateRangeHi: data.dateRangeHi || "31 जानेवारी ते 2 फेब्रुवारी 2025",
+        // No hardcoded fallback: an empty range simply hides the row.
+        dateRangeEn: data.dateRangeEn || "",
+        dateRangeHi: data.dateRangeHi || "",
         youtubeDescEn: data.youtubeDescEn || "Live broadcast of Shri Ekadash Rudra meditation session and Puja Havan via YouTube channel",
         youtubeDescHi: data.youtubeDescHi || "यूट्यूब चैनल के माध्यम से श्री एकादश रुद्र ध्यान सत्र एवं पूजा हवन लाइव प्रसारण",
         joinSessionLink: data.joinSessionLink || "",
@@ -300,23 +301,23 @@ const EditableSchedule = () => {
   return (
     <div className="space-y-6">
       <Tabs defaultValue="announcements" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 bg-white/70 dark:bg-zinc-900/70 border border-primary/10 rounded-xl p-1 mb-8 gap-1">
-          <TabsTrigger value="announcements" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+        <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 bg-white/70 dark:bg-zinc-900/70 border border-primary/10 rounded-sm p-1 mb-8 gap-1">
+          <TabsTrigger value="announcements" className="rounded-sm py-2.5 font-semibold text-xs md:text-sm">
             Announcements
           </TabsTrigger>
-          <TabsTrigger value="sessions" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+          <TabsTrigger value="sessions" className="rounded-sm py-2.5 font-semibold text-xs md:text-sm">
             Sessions
           </TabsTrigger>
-          <TabsTrigger value="content" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+          <TabsTrigger value="content" className="rounded-sm py-2.5 font-semibold text-xs md:text-sm">
             Page Content
           </TabsTrigger>
-          <TabsTrigger value="resources" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+          <TabsTrigger value="resources" className="rounded-sm py-2.5 font-semibold text-xs md:text-sm">
             Resources
           </TabsTrigger>
-          <TabsTrigger value="testimonials" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+          <TabsTrigger value="testimonials" className="rounded-sm py-2.5 font-semibold text-xs md:text-sm">
             Testimonials
           </TabsTrigger>
-          <TabsTrigger value="settings" className="rounded-lg py-2.5 font-semibold text-xs md:text-sm">
+          <TabsTrigger value="settings" className="rounded-sm py-2.5 font-semibold text-xs md:text-sm">
             Site&nbsp;Settings
           </TabsTrigger>
         </TabsList>
@@ -340,7 +341,7 @@ const EditableSchedule = () => {
         {/* ---------------- SESSIONS TAB ---------------- */}
         <TabsContent value="sessions" className="space-y-6 outline-none">
           {/* Header Action Row */}
-          <div className="flex justify-between items-center bg-white/60 dark:bg-zinc-900/60 p-4 rounded-2xl border border-primary/10">
+          <div className="flex justify-between items-center bg-white/60 dark:bg-zinc-900/60 p-4 rounded-sm border border-primary/10">
             <div>
               <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">Meditation Sessions</h2>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Add or edit upcoming dhyan sessions</p>
@@ -348,7 +349,7 @@ const EditableSchedule = () => {
             {!isAddingSession && (
               <Button
                 onClick={() => setIsAddingSession(true)}
-                className="bg-primary hover:bg-primary/95 text-white flex items-center space-x-2 rounded-xl"
+                className="bg-primary hover:bg-primary/95 text-white flex items-center space-x-2 rounded-sm"
               >
                 <Plus className="h-4 w-4" />
                 <span>Add Session</span>
@@ -365,7 +366,7 @@ const EditableSchedule = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card className="border border-primary/30 shadow-lg bg-white/95 dark:bg-zinc-900/95 rounded-[1.5rem] overflow-hidden">
+                <Card className="border border-primary/30 shadow-lg bg-white/95 dark:bg-zinc-900/95 rounded-sm overflow-hidden">
                   <CardHeader className="bg-primary/5 border-b border-primary/10 py-4 px-6 flex flex-row items-center justify-between">
                     <div>
                       <CardTitle className="text-lg font-bold text-primary">Create New Session</CardTitle>
@@ -389,13 +390,13 @@ const EditableSchedule = () => {
                           placeholder="e.g., Evening Meditation"
                           value={newSession.title}
                           onChange={(e) => setNewSession({ ...newSession, title: e.target.value })}
-                          className="border-primary/20 rounded-xl focus-visible:ring-primary"
+                          className="border-primary/20 rounded-sm focus-visible:ring-primary"
                         />
                       </div>
                       <div className="space-y-2">
                         <Label>Session Icon</Label>
                         <select
-                          className="w-full p-2 border border-primary/20 bg-background rounded-xl focus:ring-1 focus:ring-primary focus:border-primary h-10 px-3 outline-none"
+                          className="w-full p-2 border border-primary/20 bg-background rounded-sm focus:ring-1 focus:ring-primary focus:border-primary h-10 px-3 outline-none"
                           value={newSession.icon}
                           onChange={(e) => setNewSession({ ...newSession, icon: e.target.value })}
                         >
@@ -435,7 +436,7 @@ const EditableSchedule = () => {
                         placeholder="https://i.ytimg.com/vi/.../hqdefault.jpg"
                         value={newSession.imageUrl || ""}
                         onChange={(e) => setNewSession({ ...newSession, imageUrl: e.target.value })}
-                        className="border-primary/20 rounded-xl focus-visible:ring-primary"
+                        className="border-primary/20 rounded-sm focus-visible:ring-primary"
                       />
                     </div>
 
@@ -453,7 +454,7 @@ const EditableSchedule = () => {
                               links: [...newSession.links, { type: "YouTube Live", url: "" }],
                             })
                           }
-                          className="border-primary/20 text-primary hover:bg-primary/5 rounded-lg flex items-center space-x-1"
+                          className="border-primary/20 text-primary hover:bg-primary/5 rounded-sm flex items-center space-x-1"
                         >
                           <Plus className="h-3.5 w-3.5" />
                           <span>Add Link</span>
@@ -465,7 +466,7 @@ const EditableSchedule = () => {
                       ) : (
                         <div className="space-y-2">
                           {newSession.links.map((link, idx) => (
-                            <div key={idx} className="flex gap-2 items-center bg-zinc-50 dark:bg-zinc-950 p-2 rounded-xl border border-primary/5">
+                            <div key={idx} className="flex gap-2 items-center bg-zinc-50 dark:bg-zinc-950 p-2 rounded-sm border border-primary/5">
                               <Input
                                 placeholder="Link Label (e.g., Join Live)"
                                 value={link.type}
@@ -474,7 +475,7 @@ const EditableSchedule = () => {
                                   updated[idx].type = e.target.value;
                                   setNewSession({ ...newSession, links: updated });
                                 }}
-                                className="border-primary/10 rounded-lg focus-visible:ring-primary flex-1 h-9"
+                                className="border-primary/10 rounded-sm focus-visible:ring-primary flex-1 h-9"
                               />
                               <Input
                                 placeholder="https://youtube.com/..."
@@ -484,7 +485,7 @@ const EditableSchedule = () => {
                                   updated[idx].url = e.target.value;
                                   setNewSession({ ...newSession, links: updated });
                                 }}
-                                className="border-primary/10 rounded-lg focus-visible:ring-primary flex-[2] h-9"
+                                className="border-primary/10 rounded-sm focus-visible:ring-primary flex-[2] h-9"
                               />
                               <Button
                                 variant="ghost"
@@ -493,7 +494,7 @@ const EditableSchedule = () => {
                                   const updated = newSession.links.filter((_, i) => i !== idx);
                                   setNewSession({ ...newSession, links: updated });
                                 }}
-                                className="text-destructive hover:bg-destructive/5 rounded-lg h-9 w-9"
+                                className="text-destructive hover:bg-destructive/5 rounded-sm h-9 w-9"
                               >
                                 <Trash2 className="h-4 w-4" />
                               </Button>
@@ -508,13 +509,13 @@ const EditableSchedule = () => {
                       <Button
                         variant="ghost"
                         onClick={() => setIsAddingSession(false)}
-                        className="rounded-xl border border-zinc-200"
+                        className="rounded-sm border border-zinc-200"
                       >
                         Cancel
                       </Button>
                       <Button
                         onClick={handleAddSession}
-                        className="bg-primary hover:bg-primary/95 text-white rounded-xl shadow-md shadow-primary/10 px-6"
+                        className="bg-primary hover:bg-primary/95 text-white rounded-sm shadow-md shadow-primary/10 px-6"
                       >
                         Create Session
                       </Button>
@@ -527,7 +528,7 @@ const EditableSchedule = () => {
 
           {/* Sessions Grid */}
           {sessions.length === 0 ? (
-            <Card className="border border-dashed border-primary/20 bg-white/40 dark:bg-zinc-900/40 p-12 text-center rounded-[1.5rem]">
+            <Card className="border border-dashed border-primary/20 bg-white/40 dark:bg-zinc-900/40 p-12 text-center rounded-sm">
               <div className="mx-auto w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center mb-4">
                 <Calendar className="h-6 w-6 text-primary" />
               </div>
@@ -535,7 +536,7 @@ const EditableSchedule = () => {
               <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-sm mx-auto">Create some meditation sessions so that seekers can join them on the homepage.</p>
               <Button
                 onClick={() => setIsAddingSession(true)}
-                className="mt-4 bg-primary hover:bg-primary/95 text-white rounded-xl"
+                className="mt-4 bg-primary hover:bg-primary/95 text-white rounded-sm"
               >
                 Create Your First Session
               </Button>
@@ -550,7 +551,7 @@ const EditableSchedule = () => {
                 return (
                   <Card
                     key={session._id}
-                    className={`border transition-all duration-200 bg-white/90 dark:bg-zinc-900/90 rounded-[1.5rem] overflow-hidden ${
+                    className={`border transition-all duration-200 bg-white/90 dark:bg-zinc-900/90 rounded-sm overflow-hidden ${
                       isEditing ? "border-primary shadow-xl ring-1 ring-primary/20" : "border-primary/10 hover:border-primary/25 hover:shadow-md"
                     }`}
                   >
@@ -576,7 +577,7 @@ const EditableSchedule = () => {
                           </div>
 
                           {/* Time & Date details */}
-                          <div className="space-y-2 mb-4 bg-zinc-50 dark:bg-zinc-950 p-3 rounded-xl border border-primary/5">
+                          <div className="space-y-2 mb-4 bg-zinc-50 dark:bg-zinc-950 p-3 rounded-sm border border-primary/5">
                             <div className="flex items-center space-x-2 text-sm text-zinc-700 dark:text-zinc-300">
                               <Calendar className="h-4 w-4 text-primary/70 shrink-0" />
                               <span className="font-medium">{formatDate(session.date)}</span>
@@ -589,7 +590,7 @@ const EditableSchedule = () => {
 
                           {/* Image preview */}
                           {session.imageUrl && (
-                            <div className="mb-4 rounded-xl overflow-hidden h-28 border border-zinc-100 dark:border-zinc-800 relative">
+                            <div className="mb-4 rounded-sm overflow-hidden h-28 border border-zinc-100 dark:border-zinc-800 relative">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
                                 src={session.imageUrl}
@@ -610,7 +611,7 @@ const EditableSchedule = () => {
                                     href={link.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="inline-flex items-center space-x-1 bg-primary/10 hover:bg-primary/15 text-primary text-xs font-semibold px-2.5 py-1 rounded-lg border border-primary/10 transition-colors"
+                                    className="inline-flex items-center space-x-1 bg-primary/10 hover:bg-primary/15 text-primary text-xs font-semibold px-2.5 py-1 rounded-sm border border-primary/10 transition-colors"
                                   >
                                     <span>{link.type}</span>
                                     <ExternalLink className="h-3 w-3" />
@@ -627,7 +628,7 @@ const EditableSchedule = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteSession(session._id)}
-                            className="text-destructive hover:bg-destructive/5 hover:text-destructive rounded-xl flex items-center space-x-1"
+                            className="text-destructive hover:bg-destructive/5 hover:text-destructive rounded-sm flex items-center space-x-1"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                             <span>Delete</span>
@@ -636,7 +637,7 @@ const EditableSchedule = () => {
                             variant="outline"
                             size="sm"
                             onClick={() => startEditingSession(session)}
-                            className="border-primary/20 text-primary hover:bg-primary/5 rounded-xl flex items-center space-x-1"
+                            className="border-primary/20 text-primary hover:bg-primary/5 rounded-sm flex items-center space-x-1"
                           >
                             <Edit2 className="h-3.5 w-3.5" />
                             <span>Edit Session</span>
@@ -660,7 +661,7 @@ const EditableSchedule = () => {
                               onChange={(e) =>
                                 setEditingSessionData({ ...editingSessionData, title: e.target.value })
                               }
-                              className="border-primary/20 rounded-xl h-9"
+                              className="border-primary/20 rounded-sm h-9"
                             />
                           </div>
 
@@ -692,7 +693,7 @@ const EditableSchedule = () => {
                             <div className="space-y-1">
                               <Label className="text-xs">Icon Mapped</Label>
                               <select
-                                className="w-full p-1.5 border border-primary/20 bg-background rounded-xl text-sm h-9 outline-none"
+                                className="w-full p-1.5 border border-primary/20 bg-background rounded-sm text-sm h-9 outline-none"
                                 value={editingSessionData.icon}
                                 onChange={(e) =>
                                   setEditingSessionData({ ...editingSessionData, icon: e.target.value })
@@ -710,7 +711,7 @@ const EditableSchedule = () => {
                                 onChange={(e) =>
                                   setEditingSessionData({ ...editingSessionData, imageUrl: e.target.value })
                                 }
-                                className="border-primary/20 rounded-xl h-9 text-xs"
+                                className="border-primary/20 rounded-sm h-9 text-xs"
                                 placeholder="Image link"
                               />
                             </div>
@@ -730,7 +731,7 @@ const EditableSchedule = () => {
                                     links: [...editingSessionData.links, { type: "Join Live", url: "" }],
                                   })
                                 }
-                                className="h-6 text-[10px] border-primary/10 text-primary hover:bg-primary/5 rounded-md px-1.5"
+                                className="h-6 text-[10px] border-primary/10 text-primary hover:bg-primary/5 rounded-sm px-1.5"
                               >
                                 + Add Link
                               </Button>
@@ -747,7 +748,7 @@ const EditableSchedule = () => {
                                       updated[idx].type = e.target.value;
                                       setEditingSessionData({ ...editingSessionData, links: updated });
                                     }}
-                                    className="border-primary/10 rounded-lg h-7 text-xs flex-1 px-2"
+                                    className="border-primary/10 rounded-sm h-7 text-xs flex-1 px-2"
                                   />
                                   <Input
                                     placeholder="URL"
@@ -757,7 +758,7 @@ const EditableSchedule = () => {
                                       updated[idx].url = e.target.value;
                                       setEditingSessionData({ ...editingSessionData, links: updated });
                                     }}
-                                    className="border-primary/10 rounded-lg h-7 text-xs flex-[2] px-2"
+                                    className="border-primary/10 rounded-sm h-7 text-xs flex-[2] px-2"
                                   />
                                   <Button
                                     variant="ghost"
@@ -766,7 +767,7 @@ const EditableSchedule = () => {
                                       const updated = editingSessionData.links.filter((_, i) => i !== idx);
                                       setEditingSessionData({ ...editingSessionData, links: updated });
                                     }}
-                                    className="text-destructive hover:bg-destructive/5 rounded-lg h-7 w-7"
+                                    className="text-destructive hover:bg-destructive/5 rounded-sm h-7 w-7"
                                   >
                                     <Trash2 className="h-3.5 w-3.5" />
                                   </Button>
@@ -782,14 +783,14 @@ const EditableSchedule = () => {
                             variant="ghost"
                             size="sm"
                             onClick={cancelEditingSession}
-                            className="rounded-xl border h-8 px-3 text-xs"
+                            className="rounded-sm border h-8 px-3 text-xs"
                           >
                             Cancel
                           </Button>
                           <Button
                             size="sm"
                             onClick={() => handleUpdateSession(session._id)}
-                            className="bg-primary hover:bg-primary/95 text-white rounded-xl h-8 px-4 text-xs flex items-center space-x-1"
+                            className="bg-primary hover:bg-primary/95 text-white rounded-sm h-8 px-4 text-xs flex items-center space-x-1"
                           >
                             <Save className="h-3.5 w-3.5" />
                             <span>Save Changes</span>
@@ -806,14 +807,14 @@ const EditableSchedule = () => {
 
         {/* ---------------- BILINGUAL PAGE CONTENT TAB ---------------- */}
         <TabsContent value="content" className="space-y-6 outline-none">
-          <div className="flex justify-between items-center bg-white/60 dark:bg-zinc-900/60 p-4 rounded-2xl border border-primary/10">
+          <div className="flex justify-between items-center bg-white/60 dark:bg-zinc-900/60 p-4 rounded-sm border border-primary/10">
             <div>
               <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">Bilingual Page Content</h2>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Edit translations side-by-side. Make changes and click the section save buttons.</p>
             </div>
             <Button
               onClick={handleUpdateScheduleContent}
-              className="bg-primary hover:bg-primary/95 text-white flex items-center space-x-2 rounded-xl"
+              className="bg-primary hover:bg-primary/95 text-white flex items-center space-x-2 rounded-sm"
             >
               <Save className="h-4 w-4" />
               <span>Save All Page Content</span>
@@ -822,7 +823,7 @@ const EditableSchedule = () => {
 
           <div className="grid grid-cols-1 gap-6">
             {/* Header Content */}
-            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-[1.5rem]">
+            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-sm">
               <CardHeader className="border-b border-primary/5 py-4 px-6">
                 <CardTitle className="text-base font-bold text-zinc-950 dark:text-zinc-50 flex items-center space-x-2">
                   <FileText className="h-4 w-4 text-primary" />
@@ -841,7 +842,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.headingEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, headingEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -852,7 +853,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.headingHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, headingHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm hindi"
                     />
                   </div>
                 </div>
@@ -867,7 +868,7 @@ const EditableSchedule = () => {
                     <Textarea
                       value={scheduleContent.subtitleEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, subtitleEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl min-h-[80px]"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm min-h-[80px]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -878,7 +879,7 @@ const EditableSchedule = () => {
                     <Textarea
                       value={scheduleContent.subtitleHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, subtitleHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl min-h-[80px] hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm min-h-[80px] hindi"
                     />
                   </div>
                 </div>
@@ -886,7 +887,7 @@ const EditableSchedule = () => {
             </Card>
 
             {/* Location & Center Info */}
-            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-[1.5rem]">
+            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-sm">
               <CardHeader className="border-b border-primary/5 py-4 px-6">
                 <CardTitle className="text-base font-bold text-zinc-950 dark:text-zinc-50 flex items-center space-x-2">
                   <MapPin className="h-4 w-4 text-primary" />
@@ -905,7 +906,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.centerNameEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, centerNameEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -916,7 +917,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.centerNameHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, centerNameHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm hindi"
                     />
                   </div>
                 </div>
@@ -931,7 +932,7 @@ const EditableSchedule = () => {
                     <Textarea
                       value={scheduleContent.addressEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, addressEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl min-h-[80px]"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm min-h-[80px]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -942,7 +943,7 @@ const EditableSchedule = () => {
                     <Textarea
                       value={scheduleContent.addressHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, addressHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl min-h-[80px] hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm min-h-[80px] hindi"
                     />
                   </div>
                 </div>
@@ -957,7 +958,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.dateRangeEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, dateRangeEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -968,7 +969,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.dateRangeHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, dateRangeHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm hindi"
                     />
                   </div>
                 </div>
@@ -976,7 +977,7 @@ const EditableSchedule = () => {
             </Card>
 
             {/* Broadcast Details */}
-            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-[1.5rem]">
+            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-sm">
               <CardHeader className="border-b border-primary/5 py-4 px-6">
                 <CardTitle className="text-base font-bold text-zinc-950 dark:text-zinc-50 flex items-center space-x-2">
                   <Youtube className="h-4 w-4 text-primary" />
@@ -995,7 +996,7 @@ const EditableSchedule = () => {
                     <Textarea
                       value={scheduleContent.youtubeDescEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, youtubeDescEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl min-h-[80px]"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm min-h-[80px]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -1006,7 +1007,7 @@ const EditableSchedule = () => {
                     <Textarea
                       value={scheduleContent.youtubeDescHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, youtubeDescHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl min-h-[80px] hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm min-h-[80px] hindi"
                     />
                   </div>
                 </div>
@@ -1021,7 +1022,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.bannerTextEn}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, bannerTextEn: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -1032,7 +1033,7 @@ const EditableSchedule = () => {
                     <Input
                       value={scheduleContent.bannerTextHi}
                       onChange={(e) => setScheduleContent({ ...scheduleContent, bannerTextHi: e.target.value })}
-                      className="border-primary/15 focus-visible:ring-primary rounded-xl hindi"
+                      className="border-primary/15 focus-visible:ring-primary rounded-sm hindi"
                     />
                   </div>
                 </div>
@@ -1049,7 +1050,7 @@ const EditableSchedule = () => {
                         value={scheduleContent.joinSessionLink}
                         placeholder="https://youtube.com/live/..."
                         onChange={(e) => setScheduleContent({ ...scheduleContent, joinSessionLink: e.target.value })}
-                        className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                        className="border-primary/15 focus-visible:ring-primary rounded-sm"
                       />
                     </div>
                     <div className="space-y-2">
@@ -1061,7 +1062,7 @@ const EditableSchedule = () => {
                         value={scheduleContent.officialWebsiteUrl}
                         placeholder="https://centerwebsite.com"
                         onChange={(e) => setScheduleContent({ ...scheduleContent, officialWebsiteUrl: e.target.value })}
-                        className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                        className="border-primary/15 focus-visible:ring-primary rounded-sm"
                       />
                     </div>
                     <div className="space-y-2">
@@ -1073,7 +1074,7 @@ const EditableSchedule = () => {
                         value={scheduleContent.documentaryUrl}
                         placeholder="https://youtu.be/..."
                         onChange={(e) => setScheduleContent({ ...scheduleContent, documentaryUrl: e.target.value })}
-                        className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                        className="border-primary/15 focus-visible:ring-primary rounded-sm"
                       />
                     </div>
                   </div>
@@ -1084,7 +1085,7 @@ const EditableSchedule = () => {
             <div className="flex justify-end p-2">
               <Button
                 onClick={handleUpdateScheduleContent}
-                className="bg-primary hover:bg-primary/95 text-white px-8 py-6 rounded-xl font-bold shadow-lg shadow-primary/20"
+                className="bg-primary hover:bg-primary/95 text-white px-8 py-6 rounded-sm font-bold shadow-lg shadow-primary/20"
               >
                 Save All Page Content Changes
               </Button>
@@ -1094,14 +1095,14 @@ const EditableSchedule = () => {
 
         {/* ---------------- ADDITIONAL LINKS & RESOURCES TAB ---------------- */}
         <TabsContent value="resources" className="space-y-6 outline-none">
-          <div className="flex justify-between items-center bg-white/60 dark:bg-zinc-900/60 p-4 rounded-2xl border border-primary/10">
+          <div className="flex justify-between items-center bg-white/60 dark:bg-zinc-900/60 p-4 rounded-sm border border-primary/10">
             <div>
               <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">Links & Resources</h2>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Configure secondary session links and spiritual files.</p>
             </div>
             <Button
               onClick={handleUpdateAdditionalContent}
-              className="bg-primary hover:bg-primary/95 text-white flex items-center space-x-2 rounded-xl"
+              className="bg-primary hover:bg-primary/95 text-white flex items-center space-x-2 rounded-sm"
             >
               <Save className="h-4 w-4" />
               <span>Save Additional Content</span>
@@ -1110,7 +1111,7 @@ const EditableSchedule = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Join Next Session Link Card */}
-            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-[1.5rem]">
+            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-sm">
               <CardHeader className="border-b border-primary/5 py-4 px-6">
                 <CardTitle className="text-base font-bold text-zinc-950 dark:text-zinc-50 flex items-center space-x-2">
                   <Link2 className="h-4 w-4 text-primary" />
@@ -1130,7 +1131,7 @@ const EditableSchedule = () => {
                         joinNextSessionLink: e.target.value,
                       })
                     }
-                    className="border-primary/15 focus-visible:ring-primary rounded-xl"
+                    className="border-primary/15 focus-visible:ring-primary rounded-sm"
                   />
                   <p className="text-xs text-zinc-500 mt-1">This link acts as the default fallback button redirect target on the homepage.</p>
                 </div>
@@ -1138,7 +1139,7 @@ const EditableSchedule = () => {
             </Card>
 
             {/* Sacred Resources Card */}
-            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-[1.5rem] flex flex-col justify-between">
+            <Card className="border border-primary/10 shadow-sm bg-white/80 dark:bg-zinc-900/80 rounded-sm flex flex-col justify-between">
               <div>
                 <CardHeader className="border-b border-primary/5 py-4 px-6 flex flex-row items-center justify-between">
                   <div>
@@ -1161,7 +1162,7 @@ const EditableSchedule = () => {
                         ],
                       })
                     }
-                    className="border-primary/20 text-primary hover:bg-primary/5 rounded-lg flex items-center space-x-1"
+                    className="border-primary/20 text-primary hover:bg-primary/5 rounded-sm flex items-center space-x-1"
                   >
                     <Plus className="h-3.5 w-3.5" />
                     <span>Add Resource</span>
@@ -1173,7 +1174,7 @@ const EditableSchedule = () => {
                   ) : (
                     <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
                       {additionalContent.sacredResources.map((resource, index) => (
-                        <div key={index} className="flex gap-2 items-center bg-zinc-50 dark:bg-zinc-950 p-2.5 rounded-xl border border-primary/5">
+                        <div key={index} className="flex gap-2 items-center bg-zinc-50 dark:bg-zinc-950 p-2.5 rounded-sm border border-primary/5">
                           <div className="flex-1 space-y-1">
                             <Label className="text-[10px] text-zinc-500 uppercase font-semibold">Title</Label>
                             <Input
@@ -1184,13 +1185,13 @@ const EditableSchedule = () => {
                                 updated[index].title = e.target.value;
                                 setAdditionalContent({ ...additionalContent, sacredResources: updated });
                               }}
-                              className="border-primary/10 rounded-lg h-9 text-sm px-2 focus-visible:ring-primary"
+                              className="border-primary/10 rounded-sm h-9 text-sm px-2 focus-visible:ring-primary"
                             />
                           </div>
                           <div className="w-[120px] space-y-1">
                             <Label className="text-[10px] text-zinc-500 uppercase font-semibold">Icon</Label>
                             <select
-                              className="w-full p-1.5 border border-primary/10 bg-background rounded-lg text-xs h-9 outline-none focus:ring-1 focus:ring-primary"
+                              className="w-full p-1.5 border border-primary/10 bg-background rounded-sm text-xs h-9 outline-none focus:ring-1 focus:ring-primary"
                               value={resource.icon}
                               onChange={(e) => {
                                 const updated = [...additionalContent.sacredResources];
@@ -1210,7 +1211,7 @@ const EditableSchedule = () => {
                               const updated = additionalContent.sacredResources.filter((_, i) => i !== index);
                               setAdditionalContent({ ...additionalContent, sacredResources: updated });
                             }}
-                            className="text-destructive hover:bg-destructive/5 rounded-lg h-9 w-9 mt-4"
+                            className="text-destructive hover:bg-destructive/5 rounded-sm h-9 w-9 mt-4"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -1224,7 +1225,7 @@ const EditableSchedule = () => {
               <div className="p-6 border-t border-primary/5 bg-zinc-50/50 dark:bg-zinc-950/20 flex justify-end">
                 <Button
                   onClick={handleUpdateAdditionalContent}
-                  className="bg-primary hover:bg-primary/95 text-white px-6 rounded-xl font-semibold shadow-md shadow-primary/10"
+                  className="bg-primary hover:bg-primary/95 text-white px-6 rounded-sm font-semibold shadow-md shadow-primary/10"
                 >
                   Save Resources
                 </Button>

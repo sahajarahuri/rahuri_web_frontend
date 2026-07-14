@@ -42,6 +42,13 @@ export default {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
+  			brass: {
+  				DEFAULT: 'hsl(var(--brass))',
+  				deep: 'hsl(var(--brass-deep))'
+  			},
+  			indigo: 'hsl(var(--indigo))',
+  			saffron: 'hsl(var(--saffron))',
+  			ink: 'hsl(var(--ink))',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -49,6 +56,10 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+  		},
+  		boxShadow: {
+  			leaf: 'var(--shadow-leaf)',
+  			raised: 'var(--shadow-raised)'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
